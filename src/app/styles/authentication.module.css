@@ -1,0 +1,55 @@
+.mainContainer {
+    @apply flex h-screen justify-center items-center p-5;
+}
+
+.containerCardForm {
+    @apply flex h-full max-h-[40rem] w-full max-w-[64rem] rounded-2xl overflow-hidden bg-card shadow-2xl shadow-gray-700;
+}
+
+.containerLeft {
+    @apply md:w-1/2 w-full space-y-10 overflow-auto p-10;
+}
+
+.containerTextLeft {
+    @apply space-y-4 text-center;
+}
+
+.titleLeft {
+    @apply text-3xl font-extrabold;
+}
+
+.descriptionContentLeft {
+    @apply text-muted-foreground;
+}
+
+.containerSpaceContent{
+    @apply space-y-8;
+}
+
+.spaceFormTop {
+    @apply mt-7;
+}
+
+.imgRight {
+    @apply w-1/2 hidden md:block object-cover;
+}
+
+.linkToRedirect {
+    @apply block text-center hover:underline hover:scale-105;
+}
+
+.formContainer {
+    @apply space-y-5;
+}
+
+.containerShowPassword {
+    @apply relative;
+}
+
+.showPassword {
+    @apply absolute -right-1 top-1/2 -translate-y-1/2 transform text-muted-foreground;
+}
+
+.iconsShow {
+    @apply size-5;
+}
