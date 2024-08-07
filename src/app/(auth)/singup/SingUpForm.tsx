@@ -1,0 +1,42 @@
+"use client";
+
+import { singUpSchema, SingUp } from '../../../lib/validation';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "../../../components/PasswordInput"
+import LoadingButton from '../../../components/LoadingButton';
+import FormFieldProps from '../../../components/layout/FormFieldProps'
+import LayoutForm from '../../../components/layout/LayoutForm';
+import { singUp } from './actions';
+
+export default function SingUpForm() {
+    async function handleSingUp(values: SingUp) {
+        console.log(values);
+        const { error } = await singUp(values);
+        if (error) throw new Error(error);
+    }
+    return (
+        <LayoutForm
+            onSubmit={handleSingUp}
+            defaultValues={{ username: "", email: "", password: "" }}
+            resolver={zodResolver(singUpSchema)}
+        >
+            {({ isPending, ...form }) => (
+                <>
+                    <FormFieldProps name="username" form={form} label="Username">
+                        {(field) => <Input placeholder="Ingresa tu numero de usuario" {...field} />}
+                    </FormFieldProps>
+                    <FormFieldProps name="email" form={form} label="Email">
+                        {(field) => <Input placeholder="Ingresa tu correo electrónico" type="email" {...field} />}
+                    </FormFieldProps>
+                    <FormFieldProps name="password" form={form} label="Password">
+                        {(field) => <PasswordInput placeholder="Ingresa una contraseña" {...field} />}
+                    </FormFieldProps>
+                    <LoadingButton variant="default" type="submit" loading={isPending}>
+                        Create account
+                    </LoadingButton>
+                </>
+            )}
+        </LayoutForm>
+    )
+}
