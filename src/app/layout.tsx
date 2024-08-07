@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './styles/index.js'
+import React from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
