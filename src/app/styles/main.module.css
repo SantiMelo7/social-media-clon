@@ -1,0 +1,39 @@
+.iconSize {
+    @apply size-4 mr-2;
+}
+
+.buttonAvatar {
+    @apply flex-none rounded-full;
+}
+
+.buttonUser {
+    @apply sm:ms-auto;
+}
+
+.imgAvatarUlr {
+    @apply aspect-square h-fit flex-none rounded-full bg-secondary object-cover;
+}
+
+.containerNav {
+    @apply sticky top-0 z-10 bg-card shadow-sm;
+}
+
+.containerContentNav {
+    @apply mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 px-5 py-3;
+}
+
+.linkNav {
+    @apply text-2xl font-extrabold text-primary;
+}
+
+.containerSearch {
+    @apply relative;
+}
+
+.inputSearch {
+    @apply pe-10;
+}
+
+.iconSearch {
+    @apply absolute right-3 size-4 top-1/2 -translate-y-1/2 transform text-muted-foreground;
+}
