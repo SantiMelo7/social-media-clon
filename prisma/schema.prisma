@@ -20,6 +20,7 @@ model User {
   bio         String?
   createAd    DateTime  @default(now())
   session     Session[]
+  posts       Post[]
 
   @@map("users")
 }
@@ -31,4 +32,14 @@ model Session {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("session")
+}
+
+model Post {
+  id       String   @id @default(cuid())
+  content  String
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createAd DateTime @default(now())
+
+  @@map("posts")
 }

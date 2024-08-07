@@ -3,6 +3,8 @@ import { redirect } from "next/navigation"
 import SessionProvider from "./SessionProvider"
 import Navbar from "./Navbar"
 import React from "react"
+import MenuBar from "./MenuBar"
+import styles from "../styles/main.module.css"
 
 export default async function RootLayout({
     children,
@@ -13,11 +15,13 @@ export default async function RootLayout({
     if (!session.user) redirect("/login")
     return (
         <SessionProvider value={session}>
-            <div className="flex min-h-screen flex-col">
+            <div className={styles.containerRoot}>
                 <Navbar />
-                <div className="mx-auto max-w-7xl p-5">
+                <div className={styles.containerMain}>
+                    <MenuBar className={styles.menuBarLayout} />
                     {children}
                 </div>
+                <MenuBar className={styles.menuBarLayoutSecondary} />
             </div>
         </SessionProvider>
     )

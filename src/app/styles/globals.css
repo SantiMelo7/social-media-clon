@@ -59,3 +59,13 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+.tiptap p.is-editor-empty:first-child::before {
+  @apply float-left h-0 pointer-events-none;
+  color: theme("colors.muted.foreground");
+  content: attr(data-placeholder);
+}
+
+.tiptap.ProseMirror {
+  @apply outline-none;
+}
