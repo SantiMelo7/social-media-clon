@@ -8,11 +8,11 @@ export default function FormFieldProps<TFieldValues extends FieldValues>({ form,
         <FormField
             control={form.control}
             name={name}
-            render={(field) => (
+            render={({ field }) => (
                 <FormItem>
                     <FormLabel>{label}</FormLabel>
                     <FormControl>
-                        {children(field)}
+                        {children({ ...field })}
                     </FormControl>
                     <FormMessage />
                 </FormItem>

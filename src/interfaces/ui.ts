@@ -31,4 +31,8 @@ export interface childrenNormal {
 
 export interface LayoutAuthProps extends childrenNormal {
     img: string;
+    title: string;
+    description?: string,
+    link: string;
+    linkText: string;
 }

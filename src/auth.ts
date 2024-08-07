@@ -10,7 +10,7 @@ const adapter = new PrismaAdapter(prisma.session, prisma.user);
 export const lucia = new Lucia(adapter, {
     sessionCookie: {
         expires: false,
-        attributes : {
+        attributes: {
             secure: process.env.NODE_ENV === "production"
         }
     },
@@ -18,6 +18,7 @@ export const lucia = new Lucia(adapter, {
         return {
             id: data.id,
             username: data.username,
+            displayName: data.displayName,
             email: data.email,
             password: data.password,
             googleId: data.googleId,
@@ -36,6 +37,7 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
     id: string;
     username: string;
+    displayName: string;
     email: string
     password: string;
     googleId: string;
@@ -43,20 +45,20 @@ interface DatabaseUserAttributes {
 }
 
 export const validateRequest = cache(
-    async() : Promise<{ user: User, session: Session} |  { user: null, session: null}> => {
+    async (): Promise<{ user: User, session: Session } | { user: null, session: null }> => {
         const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
-        if(!sessionId) {
+        if (!sessionId) {
             return {
                 user: null, session: null
             }
         }
         const result = await lucia.validateSession(sessionId)
         try {
-            if(result.user && result.session.fresh) {
+            if (result.user && result.session.fresh) {
                 const duplicateSession = lucia.createSessionCookie(result.user.id)
                 cookies().set(duplicateSession.name, duplicateSession.value, duplicateSession.attributes)
             }
-            if(result.session) {
+            if (result.session) {
                 const valueSessionCokkie = lucia.createBlankSessionCookie()
                 cookies().set(valueSessionCokkie.name, valueSessionCokkie.value, valueSessionCokkie.attributes)
             }

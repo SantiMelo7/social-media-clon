@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 
 export default function SingUpPage() {
     return (
-        <LayoutAuth img={SingUpImg.src}>
+        <LayoutAuth title='Sing Up' description='Lorem Sunt fugiat magna occaecat non fugiat esse pariatur esse sunt ad aute incididunt'
+            img={SingUpImg.src} link='/login' linkText='Al ready have a account? Log in'
+        >
             <SingUpForm />
         </LayoutAuth>
     )

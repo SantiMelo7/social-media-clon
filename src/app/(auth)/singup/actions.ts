@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 export async function singUp(
     crendetials: SingUp
 ): Promise<{ error: string }> {
+    console.log(crendetials);
     try {
         const { username, email, password } = singUpSchema.parse(crendetials)
         const passwordHash = await hash(password, {
@@ -50,11 +51,11 @@ export async function singUp(
             data: {
                 id: userId,
                 username,
+                displayName: username,
                 email,
                 password: passwordHash,
             }
         })
-
         const session = await lucia.createSession(userId, {})
         const sessionCookkie = lucia.createSessionCookie(session.id)
         cookies().set(
@@ -63,7 +64,6 @@ export async function singUp(
             sessionCookkie.attributes,
         )
         return redirect("/")
-
     } catch (error) {
         if (isRedirectError(error)) throw error;
         return {

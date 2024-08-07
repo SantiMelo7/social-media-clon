@@ -10,24 +10,25 @@ datasource db {
 }
 
 model User {
-  id        String    @id
-  username  String    @unique
-  email     String?   @unique
-  password  String?
-  googleId  String?   @unique
-  avatarUrl String?
-  bio       String?
-  createAd  DateTime  @default(now())
-  sessions  Session[]
+  id          String    @id
+  username    String    @unique
+  displayName String
+  email       String?   @unique
+  password    String?
+  googleId    String?   @unique
+  avatarUrl   String?
+  bio         String?
+  createAd    DateTime  @default(now())
+  session     Session[]
 
-  @@map("(users)")
+  @@map("users")
 }
 
 model Session {
   id        String   @id
   userId    String
   expiresAt DateTime
-  user      User     @relation(fields: [userId], onDelete: Cascade, references: [id])
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("(session)")
+  @@map("session")
 }
