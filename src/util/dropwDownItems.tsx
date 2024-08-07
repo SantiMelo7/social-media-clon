@@ -1,11 +1,13 @@
-import { LogOutIcon, UserIcon } from "lucide-react";
+import { LogOutIcon, Monitor, MonitorCog, Moon, Sun, UserIcon } from "lucide-react";
 import { logout } from "@/app/(auth)/actions";
 import styles from "../app/styles/main.module.css";
 
-export const dropwDownItems = [
+export const getDropdownItems = (username: string, theme: string | undefined, setTheme: (theme: string) => void) => [
     {
         key: 1,
-        content: (username: string) => `Logged in @${username}`,
+        content: `Logged in @${username}`,
+        theme: false,
+        subMenu: null,
         icon: null,
         href: null,
         onClick: null,
@@ -13,14 +15,51 @@ export const dropwDownItems = [
     {
         key: 2,
         content: 'Profile',
+        theme: false,
+        subMenu: null,
         icon: (
             <UserIcon className={styles.iconSize} />
         ),
-        href: (username: string) => `/users/${username}`,
+        href: `/users/${username}`,
         onClick: null,
     },
     {
         key: 3,
+        content: 'Theme',
+        theme: true,
+        icon: (
+            <Monitor className={styles.iconSize} />
+        ),
+        href: null,
+        onClick: () => logout(),
+        subMenu: [
+            {
+                key: 1,
+                contentSub: 'System Default',
+                iconSub: <MonitorCog className={styles.iconTheme} />,
+                onClickSub: () => setTheme('system'),
+                checked: theme === 'system'
+            },
+            {
+                key: 2,
+                contentSub: 'Light',
+                iconSub: <Sun className={styles.iconTheme} />,
+                onClickSub: () => setTheme('light'),
+                checked: theme === 'light'
+            },
+            {
+                key: 3,
+                contentSub: 'Dark',
+                iconSub: <Moon className={styles.iconTheme} />,
+                onClickSub: () => setTheme('dark'),
+                checked: theme === 'dark'
+            }
+        ]
+    },
+    {
+        key: 4,
+        theme: false,
+        subMenu: null,
         content: 'Logout',
         icon: (
             <LogOutIcon className={styles.iconSize} />
