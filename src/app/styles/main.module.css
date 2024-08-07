@@ -37,3 +37,67 @@
 .iconSearch {
     @apply absolute right-3 size-4 top-1/2 -translate-y-1/2 transform text-muted-foreground;
 }
+
+.iconTheme {
+    @apply size-4 mr-2;
+}
+
+.iconCheck {
+    @apply ms-2 size-4;
+}
+
+.containerRoot {
+    @apply flex min-h-screen flex-col;
+}
+
+.containerMain {
+    @apply mx-auto max-w-7xl flex w-full grow gap-5 p-5;
+}
+
+.menuBarLayout {
+    @apply sticky top-[5rem] hidden h-fit flex-none space-y-3 bg-card px-3 py-5 sm:block rounded-2xl xl:w-80 shadow-sm;
+}
+
+.menuBarLayoutSecondary {
+    @apply sticky bottom-0 flex w-full justify-center gap-5 border-t-2 p-3 sm:hidden;
+}
+
+.containerAppMain {
+    @apply h-[200vh] w-full bg-red-50;
+}
+
+.containerAppMainEditor {
+    @apply w-full;
+}
+
+.containerPostEditor {
+    @apply flex flex-col gap-5 rounded-sm bg-card p-6 shadow-sm;
+}
+
+.containerUserAndEditor {
+    @apply flex gap-5;
+}
+
+.userAvatarResponsive {
+    @apply hidden sm:inline;
+}
+
+.editorContent {
+    @apply w-full max-h-[20rem] overflow-y-auto bg-gray-200 rounded-2xl px-5 py-3;
+}
+
+.containerButtonPosts {
+    @apply flex justify-end;
+}
+
+.buttonPostCreate {
+    @apply max-w-20;
+}
+
+.buttonMenuBar {
+    @apply flex items-center justify-start gap-3;
+}
+
+.responsiveTextTitle {
+    @apply hidden lg:inline;
+}

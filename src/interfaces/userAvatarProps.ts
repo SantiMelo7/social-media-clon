@@ -3,7 +3,3 @@ export interface UserAvatarProps {
     size?: number;
     className?: string;
 }
-
-export interface UserButtonProps {
-    className?: string;
-}
