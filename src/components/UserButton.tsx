@@ -40,7 +40,7 @@ export default function UserButton({ className }: ClassNameProps) {
                             </Link>
                         )}
                         {!text.href && text.onClick && !text.theme && (
-                            <DropdownMenuItem onClick={() => text.onClick}>
+                            <DropdownMenuItem onClick={text.onClick}>
                                 {text.icon}
                                 {text.content}
                             </DropdownMenuItem>

@@ -9,11 +9,13 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/PasswordInput";
 import LoadingButton from '../../../components/LoadingButton';
 import { login } from "./actions";
+import { useState } from "react";
 
 export default function LoginForm() {
+    const [error, setError] = useState<string>()
     async function handleLogin(values: Login) {
         const { error } = await login(values);
-        if (error) throw new Error(error);
+        if (error) setError(error);
     }
     return (
         <LayoutForm
@@ -23,6 +25,7 @@ export default function LoginForm() {
         >
             {({ isPending, ...form }) => (
                 <>
+                    {error && <p className="text-center text-destructive">{error}</p>}
                     <FormFieldProps form={form} name="username" label="Username">
                         {(field) => <Input placeholder="Ingresa tu número de usuario" {...field} />}
                     </FormFieldProps>

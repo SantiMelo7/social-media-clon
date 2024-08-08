@@ -1,0 +1,44 @@
+.containerRigthMain {
+    @apply sticky top-[5rem] hidden md:block lg:w-80 w-72 h-fit flex-none;
+}
+
+.suspenseSpin {
+    @apply mx-auto animate-spin;
+}
+
+.containerMainSideBar {
+    @apply space-y-8 rounded-2xl mt-4 bg-card p-5 shadow-sm;
+}
+
+.titleCardSideBar {
+    @apply text-xl font-bold;
+}
+
+.textPrincipal {
+    @apply line-clamp-1 break-all font-semibold hover:underline;
+}
+
+.containerFormatNumber {
+    @apply flex gap-3 text-sm text-muted-foreground;
+}
+
+.parragrafhNoTrending {
+    @apply text-primary;
+}
+
+
+.containerFollow {
+    @apply flex items-center justify-between gap-3
+}
+
+.linkUserNameFollow {
+    @apply flex items-center gap-3;
+}
+
+.avatarFollow {
+    @apply flex-non;
+}
+
+.parragrafhCount {
+    @apply line-clamp-1 break-all text-muted-foreground text-sm;
+}
