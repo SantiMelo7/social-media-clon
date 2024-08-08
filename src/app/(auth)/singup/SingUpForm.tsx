@@ -8,12 +8,14 @@ import LoadingButton from '../../../components/LoadingButton';
 import FormFieldProps from '../../../components/layout/FormFieldProps'
 import LayoutForm from '../../../components/layout/LayoutForm';
 import { singUp } from './actions';
+import { useState } from 'react';
 
 export default function SingUpForm() {
+    const [error, setError] = useState<string>()
     async function handleSingUp(values: SingUp) {
         console.log(values);
         const { error } = await singUp(values);
-        if (error) throw new Error(error);
+        if (error) setError(error);
     }
     return (
         <LayoutForm
@@ -23,6 +25,7 @@ export default function SingUpForm() {
         >
             {({ isPending, ...form }) => (
                 <>
+                    {error && <p className="text-center text-destructive">{error}</p>}
                     <FormFieldProps name="username" form={form} label="Username">
                         {(field) => <Input placeholder="Ingresa tu numero de usuario" {...field} />}
                     </FormFieldProps>

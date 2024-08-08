@@ -19,8 +19,6 @@ export const lucia = new Lucia(adapter, {
             id: data.id,
             username: data.username,
             displayName: data.displayName,
-            email: data.email,
-            password: data.password,
             googleId: data.googleId,
             avatarUrl: data.avatarUrl,
         }
@@ -38,14 +36,12 @@ interface DatabaseUserAttributes {
     id: string;
     username: string;
     displayName: string;
-    email: string
-    password: string;
     googleId: string;
     avatarUrl: string | null
 }
 
 export const validateRequest = cache(
-    async (): Promise<{ user: User, session: Session } | { user: null, session: null }> => {
+    async (): Promise<{ user: User, session: Session } | { user: null; session: null; }> => {
         const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
         if (!sessionId) {
             return {
@@ -55,10 +51,10 @@ export const validateRequest = cache(
         const result = await lucia.validateSession(sessionId)
         try {
             if (result.user && result.session.fresh) {
-                const duplicateSession = lucia.createSessionCookie(result.user.id)
+                const duplicateSession = lucia.createSessionCookie(result.session.id)
                 cookies().set(duplicateSession.name, duplicateSession.value, duplicateSession.attributes)
             }
-            if (result.session) {
+            if (!result.session) {
                 const valueSessionCokkie = lucia.createBlankSessionCookie()
                 cookies().set(valueSessionCokkie.name, valueSessionCokkie.value, valueSessionCokkie.attributes)
             }
