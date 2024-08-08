@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { formatDate, formatDistanceToNowStrict } from "date-fns"
+import { unstable_cache } from "next/cache"
+import prisma from "@/lib/prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -28,3 +30,24 @@ export function formatNumber(n: number): string {
     maximumFractionDigits: 1,
   }).format(n)
 }
+
+export const getTrendingTopics = unstable_cache(
+  async () => {
+    const result = await prisma.$queryRaw<{ hashtag: string; count: bigint }[]>`
+            SELECT LOWER(unnest(regexp_matches(content, '#[[:alnum:]_]+', 'g'))) AS hashtag, COUNT(*) AS count
+            FROM posts
+            GROUP BY (hashtag)
+            ORDER BY count DESC, hashtag ASC
+            LIMIT 5
+        `;
+
+    return result.map((row) => ({
+      hashtag: row.hashtag,
+      count: Number(row.count),
+    }));
+  },
+  ["trending_topics"],
+  {
+    revalidate: 3 * 60 * 60,
+  },
+);
