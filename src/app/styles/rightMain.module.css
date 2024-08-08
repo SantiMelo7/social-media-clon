@@ -36,7 +36,7 @@
 }
 
 .avatarFollow {
-    @apply flex-non;
+    @apply flex-none;
 }
 
 .parragrafhCount {
