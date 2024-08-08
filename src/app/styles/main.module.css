@@ -55,7 +55,7 @@
 }
 
 .menuBarLayout {
-    @apply sticky top-[5rem] hidden h-fit flex-none space-y-3 bg-card px-3 py-5 sm:block rounded-2xl xl:w-80 shadow-sm;
+    @apply sticky top-[5rem] hidden h-fit flex-none space-y-3 bg-card px-3 py-5 sm:block rounded-2xl xl:w-60 shadow-sm;
 }
 
 .menuBarLayoutSecondary {
@@ -63,11 +63,11 @@
 }
 
 .containerAppMain {
-    @apply h-[200vh] w-full bg-red-50;
+    @apply w-full min-w-0 flex gap-5;
 }
 
 .containerAppMainEditor {
-    @apply w-full;
+    @apply w-full min-w-0 space-y-5;
 }
 
 .containerPostEditor {
@@ -100,4 +100,24 @@
 
 .responsiveTextTitle {
     @apply hidden lg:inline;
+}
+
+.containerPostContent {
+    @apply space-y-3 rounded-2xl bg-card p-5 shadow-sm;
+}
+
+.containerTextWrap {
+    @apply flex flex-wrap gap-3;
+}
+
+.linkAvatarPost {
+    @apply block font-medium hover:underline;
+}
+
+.linkUsernamePost {
+    @apply block text-sm text-muted-foreground;
+}
+
+.contentPost {
+    @apply whitespace-pre-line break-words;
 }
