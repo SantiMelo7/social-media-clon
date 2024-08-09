@@ -1,8 +1,9 @@
 import { LogOutIcon, Monitor, MonitorCog, Moon, Sun, UserIcon } from "lucide-react";
 import { logout } from "@/app/(auth)/actions";
 import styles from "../app/styles/main.module.css";
+import { QueryClient } from "@tanstack/react-query";
 
-export const getDropdownItems = (username: string, theme: string | undefined, setTheme: (theme: string) => void) => [
+export const getDropdownItems = (username: string, theme: string | undefined, setTheme: (theme: string) => void, queryClient: QueryClient) => [
     {
         key: 1,
         content: `Logged in @${username}`,
@@ -65,6 +66,9 @@ export const getDropdownItems = (username: string, theme: string | undefined, se
             <LogOutIcon className={styles.iconSize} />
         ),
         href: null,
-        onClick: () => logout(),
+        onClick: () => {
+            queryClient.clear()
+            logout()
+        },
     }
 ]

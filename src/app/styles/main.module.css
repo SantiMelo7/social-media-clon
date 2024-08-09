@@ -106,6 +106,10 @@
     @apply space-y-3 rounded-2xl bg-card p-5 shadow-sm;
 }
 
+.containerEndMain {
+    @apply flex justify-between gap-3;
+}
+
 .containerTextWrap {
     @apply flex flex-wrap gap-3;
 }
@@ -120,4 +124,64 @@
 
 .contentPost {
     @apply whitespace-pre-line break-words;
+}
+
+.containerInfiniteScroll {
+    @apply space-y-5;
+}
+
+.containerContentSleketon {
+    @apply w-full animate-pulse space-y-3 rounded-2xl bg-card shadow-sm;
+}
+
+.containerSecondSleketon {
+    @apply flex flex-wrap gap-3 p-3;
+}
+
+.containerOneTwoSleketon {
+    @apply space-y-1.5;
+}
+
+.sleketonOne {
+    @apply size-12 rounded-full;
+}
+
+.sleketonTwo {
+    @apply h-4 w-24 rounded mt-3;
+}
+
+.sleketonThree {
+    @apply h-4 w-20 rounded;
+}
+
+.containerSleketonFour {
+    @apply p-3;
+}
+
+.sleketonFour {
+    @apply h-16 rounded w-full mx-auto -translate-y-5;
+}
+
+.containerDialogFooter {
+    @apply flex space-x-3 justify-start items-start w-full;
+}
+
+.buttonCancel {
+    @apply w-full
+}
+
+.moreHorizontal {
+    @apply size-5 text-muted-foreground;
+}
+
+.containerTrash {
+    @apply flex items-center gap-3 text-destructive;
+}
+
+.trash {
+    @apply size-4;
+}
+
+.animationThreePunts {
+    @apply opacity-0 transition-opacity;
 }

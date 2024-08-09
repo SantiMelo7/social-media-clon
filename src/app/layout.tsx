@@ -4,6 +4,7 @@ import './styles/index.js'
 import React from 'react'
 import { ThemeProvider } from "next-themes"
 import { Toaster } from '@/components/ui/toaster'
+import ReactQueryProvider from './ReactQueryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,8 +21,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>{children}</ThemeProvider>
-                <Toaster />
+                <ReactQueryProvider>
+                    <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>{children}</ThemeProvider>
+                    <Toaster />
+                </ReactQueryProvider>
             </body>
         </html>
     )
