@@ -3,15 +3,17 @@
 import { EditorContent, useEditor } from "@tiptap/react"
 import StartetKit from "@tiptap/starter-kit"
 import Placeholder from "@tiptap/extension-placeholder"
-import { submitPost } from "./actions";
 import { useSession } from "@/app/(main)/SessionProvider";
 import UserAvatar from "@/components/UserAvatar";
-import { Button } from "@/components/ui/button";
 import styles from "../../../app/styles/main.module.css"
+import { useSubmitPostMutation } from "./mutations";
+import LoadingButton from "@/components/LoadingButton";
 
 export default function PostEditor() {
 
     const { user } = useSession()
+
+    const mutation = useSubmitPostMutation()
 
     const editor = useEditor({
         extensions: [
@@ -29,9 +31,12 @@ export default function PostEditor() {
         blockSeparator: "/n"
     }) || ""
 
-    async function handleSubmit() {
-        await submitPost(input)
-        editor?.commands.clearContent()
+    function handleSubmit() {
+        mutation.mutate(input, {
+            onSuccess: () => {
+                editor?.commands.clearContent()
+            }
+        })
     }
 
     return (
@@ -44,14 +49,15 @@ export default function PostEditor() {
                 />
             </div>
             <div className={styles.containerButtonPosts}>
-                <Button
+                <LoadingButton
                     variant="default"
                     onClick={handleSubmit}
+                    loading={mutation.isPending}
                     disabled={!input.trim()}
                     className={styles.buttonPostCreate}
                 >
                     Post
-                </Button>
+                </LoadingButton>
             </div>
         </div>
     )

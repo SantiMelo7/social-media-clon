@@ -10,12 +10,14 @@ import { getDropdownItems } from "@/util/dropwDownItems";
 import { useTheme } from "next-themes";
 import { Check } from "lucide-react";
 import { ClassNameProps } from "@/interfaces/classNameProps";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function UserButton({ className }: ClassNameProps) {
     const { user } = useSession()
     const userNameSession = user.username
     const { theme, setTheme } = useTheme()
-    const dropItems = getDropdownItems(userNameSession, theme, setTheme)
+    const queryClient = useQueryClient()
+    const dropItems = getDropdownItems(userNameSession, theme, setTheme, queryClient)
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

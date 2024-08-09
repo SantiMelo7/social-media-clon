@@ -42,3 +42,7 @@
 .parragrafhCount {
     @apply line-clamp-1 break-all text-muted-foreground text-sm;
 }
+
+.textError {
+    @apply font-bold text-primary text-center;
+}
