@@ -1,4 +1,4 @@
-import { PostMoreButton } from "../../interfaces/deletePostDialogProps";
+import { PostMoreButtonProps } from "../../interfaces/deletePostDialogProps";
 import { useState } from "react";
 import DeletePostDialog from "./delete/DeletePostDialog";
 import { Button } from "../ui/button";
@@ -6,7 +6,7 @@ import { MoreHorizontal, Trash2 } from "lucide-react";
 import { DropdownMenuContent, DropdownMenuTrigger, DropdownMenu, DropdownMenuItem } from "../ui/dropdown-menu";
 import styles from "../../app/styles/main.module.css"
 
-export default function PostMoreButton({ className, post }: PostMoreButton) {
+export default function PostMoreButton({ className, post }: PostMoreButtonProps) {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 
     return (

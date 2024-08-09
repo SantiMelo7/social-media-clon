@@ -7,6 +7,6 @@ export interface DeletePostDialogProps {
     onClose: () => void
 }
 
-export interface PostMoreButton extends ClassNameProps {
+export interface PostMoreButtonProps extends ClassNameProps {
     post: PostData;
 }
