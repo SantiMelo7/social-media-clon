@@ -14,7 +14,7 @@ export async function singUp(
 ): Promise<{ error: string }> {
     console.log(crendetials);
     try {
-        const { username, email, password } = singUpSchema.parse(crendetials)
+        const { username, displayName, email, password } = singUpSchema.parse(crendetials)
         const passwordHash = await hash(password, {
             memoryCost: 19456,
             timeCost: 2,
@@ -29,9 +29,21 @@ export async function singUp(
                 }
             }
         })
+        const existingDisplayName = await prisma.user.findFirst({
+            where: {
+                username: {
+                    equals: displayName,
+                    mode: "insensitive"
+                }
+            }
+        })
         if (existingUsername) {
             return {
                 error: "Username alredy taken"
+            }
+        } else if (existingDisplayName) {
+            return {
+                error: "DisplayName alredy taken"
             }
         }
         const existingEmail = await prisma.user.findFirst({
@@ -51,7 +63,7 @@ export async function singUp(
             data: {
                 id: userId,
                 username,
-                displayName: username,
+                displayName,
                 email,
                 password: passwordHash,
             }

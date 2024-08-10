@@ -12,7 +12,7 @@ datasource db {
 model User {
   id          String    @id
   username    String    @unique
-  displayName String
+  displayName String    @unique
   email       String?   @unique
   password    String?
   googleId    String?   @unique

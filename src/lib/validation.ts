@@ -7,6 +7,9 @@ export const singUpSchema = z.object({
     username: requiredString.regex(
         /^[a-zA-Z0-9_-]+$/, "Only letters, numbers - and _ allowed"
     ),
+    displayName: requiredString.regex(
+        /^[a-zA-Z0-9_-]+$/, "Only letters, numbers - and _ allowed"
+    ),
     password: requiredString.min(8, "Must be a least 8 characthers")
 })
 
