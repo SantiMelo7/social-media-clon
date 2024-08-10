@@ -40,7 +40,7 @@ export default function UserPosts({ userId }: UserPostsProps) {
         return <PostsLoadingSkeleton />
     }
     if (status === "success" && !posts.length && !hasNextPage) {
-        return <p className={styles.textError}>This user hasn't posted anuthing yet.</p>
+        return <p className={styles.textError}>This user hasn&apos;t posted anuthing yet.</p>
     }
 
     return (
