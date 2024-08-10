@@ -35,8 +35,8 @@ export default function ForYouFeed() {
     if (status === "pending") {
         return <PostsLoadingSkeleton />
     }
-    if (status === "error") {
-        return <p className={styles.textError}>An error ocurred while loanding</p>
+    if (status === "success" && !posts.length && !hasNextPage) {
+        return <p className={styles.textError}>No one has posated anything yet.</p>
     }
 
     return (

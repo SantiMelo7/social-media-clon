@@ -7,7 +7,11 @@
 }
 
 .containerMainSideBar {
-    @apply space-y-8 rounded-2xl mt-4 bg-card p-5 shadow-sm;
+    @apply space-y-8 rounded-2xl bg-card p-5 shadow-sm;
+}
+
+.containerMainSideBarTrending {
+    @apply space-y-8 mt-4 rounded-2xl bg-card p-5 shadow-sm;
 }
 
 .titleCardSideBar {

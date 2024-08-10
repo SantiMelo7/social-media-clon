@@ -99,7 +99,7 @@
 }
 
 .responsiveTextTitle {
-    @apply hidden lg:inline;
+    @apply hidden lg:inline font-semibold;
 }
 
 .containerPostContent {
