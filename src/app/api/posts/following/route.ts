@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
                 user: {
                     following: {
                         some: {
-                            followerId: user.id
+                            followingId: user.id
                         }
                     }
                 }
