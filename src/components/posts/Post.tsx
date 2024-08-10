@@ -9,7 +9,7 @@ import { PostProps } from "@/interfaces/postProps";
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
     return (
-        <article className={`group/post ${styles.containerPostContent}`}>
+        <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
             <div className={styles.containerEndMain}>
                 <div className={styles.containerTextWrap}>
                     <Link href={`/users/${post.user.username}`}>
@@ -25,7 +25,7 @@ export default function Post({ post }: PostProps) {
                     </div>
                 </div>
                 {post.user.id === user?.id && (
-                    <PostMoreButton post={post} className={`group-hover/post:opacity-100 ${styles.animationThreePunts}`} />
+                    <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
                 )}
             </div>
             <div className={styles.contentPost}>{post.content}</div>

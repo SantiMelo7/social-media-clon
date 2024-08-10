@@ -1,10 +1,10 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { userDataSelect } from "@/lib/types";
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
-import { Button } from "./ui/button";
 import styles from "../app/styles/rightMain.module.css"
+import FollowButton from "./follow/FollowButton";
+import { getUserDataSelect } from "@/lib/types";
 
 export async function WhoToFollow() {
     const { user } = await validateRequest();
@@ -15,8 +15,13 @@ export async function WhoToFollow() {
             NOT: {
                 id: user.id,
             },
+            followers: {
+                none: {
+                    followerId: user.id
+                }
+            }
         },
-        select: userDataSelect,
+        select: getUserDataSelect(user.id),
         take: 5,
     });
 
@@ -32,7 +37,13 @@ export async function WhoToFollow() {
                             <p className={styles.parragrafhCount}>@{text.username}</p>
                         </div>
                     </Link>
-                    <Button>Follow</Button>
+                    <FollowButton
+                        userId={text.id}
+                        initialState={{
+                            followers: text._count.followers,
+                            isFollowedByUser: text.followers.some((prev) => prev.followerId === user.id)
+                        }}
+                    />
                 </div>
             ))}
         </div>

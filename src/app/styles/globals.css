@@ -69,3 +69,15 @@
 .tiptap.ProseMirror {
   @apply outline-none;
 }
+
+.notFoundContainer {
+  @apply my-12 w-full space-y-3 text-center;
+}
+
+.notFoundTitle {
+  @apply text-3xl font-semibold;
+}
+
+.animateSpin {
+  @apply mx-auto animate-spin my-3
+}

@@ -5,7 +5,7 @@ import styles from "../app/styles/rightMain.module.css"
 export async function TrendingTopics() {
     const trendingTopics = await getTrendingTopics()
     return (
-        <div className={styles.containerMainSideBar}>
+        <div className={styles.containerMainSideBarTrending}>
             <div className={styles.titleCardSideBar}>Trending Topics</div>
             {trendingTopics.map(({ hashtag, count }) => {
                 const title = hashtag.split('#')[1]

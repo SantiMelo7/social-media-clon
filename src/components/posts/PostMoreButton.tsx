@@ -1,3 +1,5 @@
+"use client"
+
 import { PostMoreButtonProps } from "../../interfaces/deletePostDialogProps";
 import { useState } from "react";
 import DeletePostDialog from "./delete/DeletePostDialog";
@@ -13,7 +15,7 @@ export default function PostMoreButton({ className, post }: PostMoreButtonProps)
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button size="icon" variant="ghost" className={className}>
+                    <Button size="icon" variant="defaultNotBg" className={className}>
                         <MoreHorizontal className={styles.moreHorizontal} />
                     </Button>
                 </DropdownMenuTrigger>

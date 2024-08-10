@@ -9,7 +9,7 @@ export default function MenuBar({ className }: ClassNameProps) {
         <div className={className}>
             {menuBarData.map((text) => (
                 <div key={text.key}>
-                    <Button variant="ghost" className={styles.buttonMenuBar} title={text.title} asChild>
+                    <Button variant="defaultNotBg" className={styles.buttonMenuBar} title={text.title} asChild>
                         <Link href={text.href}>
                             {text.icon}
                             <span className={styles.responsiveTextTitle}>{text.title}</span>

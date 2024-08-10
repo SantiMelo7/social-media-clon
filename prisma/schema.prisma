@@ -12,7 +12,7 @@ datasource db {
 model User {
   id          String    @id
   username    String    @unique
-  displayName String
+  displayName String    @unique
   email       String?   @unique
   password    String?
   googleId    String?   @unique
@@ -21,8 +21,20 @@ model User {
   createAd    DateTime  @default(now())
   session     Session[]
   posts       Post[]
+  following   Follow[]  @relation("Following")
+  followers   Follow[]  @relation("Followers")
 
   @@map("users")
+}
+
+model Follow {
+  followerId  String
+  follower    User   @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User   @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@map("follows")
 }
 
 model Session {

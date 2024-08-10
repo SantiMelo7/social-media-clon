@@ -3,13 +3,17 @@
 import Post from "@/components/posts/Post"
 import { PostsPage } from "@/lib/types"
 import { useInfiniteQuery } from "@tanstack/react-query"
-import styles from "../styles/rightMain.module.css"
-import stylesMain from "../styles/main.module.css"
+import styles from "../../../../app/styles/rightMain.module.css"
+import stylesMain from "../../../../app/styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer"
 import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton"
 
-export default function ForYouFeed() {
+interface UserPostsProps {
+    userId: string
+}
+
+export default function UserPosts({ userId }: UserPostsProps) {
     const {
         data,
         fetchNextPage,
@@ -18,11 +22,11 @@ export default function ForYouFeed() {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
-        queryKey: ["post-feed", "for-you"],
+        queryKey: ["post-feed", "users-posts", userId],
         queryFn: ({ pageParam }) =>
             kyInstance
                 .get(
-                    "/api/posts/for-you",
+                    `/api/users/${userId}/posts`,
                     pageParam ? { searchParams: { cursor: pageParam } } : {},
                 )
                 .json<PostsPage>(),
@@ -36,7 +40,7 @@ export default function ForYouFeed() {
         return <PostsLoadingSkeleton />
     }
     if (status === "success" && !posts.length && !hasNextPage) {
-        return <p className={styles.textError}>No one has posated anything yet.</p>
+        return <p className={styles.textError}>This user hasn&apos;t posted anuthing yet.</p>
     }
 
     return (

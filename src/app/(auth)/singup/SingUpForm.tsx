@@ -20,14 +20,17 @@ export default function SingUpForm() {
     return (
         <LayoutForm
             onSubmit={handleSingUp}
-            defaultValues={{ username: "", email: "", password: "" }}
+            defaultValues={{ username: "", displayName: "", email: "", password: "" }}
             resolver={zodResolver(singUpSchema)}
         >
             {({ isPending, ...form }) => (
                 <>
                     {error && <p className="text-center text-destructive">{error}</p>}
                     <FormFieldProps name="username" form={form} label="Username">
-                        {(field) => <Input placeholder="Ingresa tu numero de usuario" {...field} />}
+                        {(field) => <Input placeholder="Ingresa tu nombre completo" {...field} />}
+                    </FormFieldProps>
+                    <FormFieldProps name="displayName" form={form} label="Display Name">
+                        {(field) => <Input placeholder="Ingresa tu nombre de usuario" {...field} />}
                     </FormFieldProps>
                     <FormFieldProps name="email" form={form} label="Email">
                         {(field) => <Input placeholder="Ingresa tu correo electrónico" type="email" {...field} />}
