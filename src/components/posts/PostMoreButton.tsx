@@ -1,6 +1,6 @@
 "use client"
 
-import { PostMoreButtonProps } from "../../interfaces/deletePostDialogProps";
+import { PostMoreButtonProps } from "../../interfaces/dialogProps";
 import { useState } from "react";
 import DeletePostDialog from "./delete/DeletePostDialog";
 import { Button } from "../ui/button";
@@ -28,11 +28,7 @@ export default function PostMoreButton({ className, post }: PostMoreButtonProps)
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-            <DeletePostDialog
-                post={post}
-                open={showDeleteDialog}
-                onClose={() => setShowDeleteDialog(false)}
-            />
+            <DeletePostDialog data={post} open={showDeleteDialog} onOpenChange={() => setShowDeleteDialog(false)} />
         </>
     )
 }
