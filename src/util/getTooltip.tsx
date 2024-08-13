@@ -1,0 +1,28 @@
+import UserAvatar from "@/components/UserAvatar";
+import { PostProps } from "@/interfaces/postProps";
+import styles from "../app/styles/main.module.css"
+import UserTooltip from "@/components/UserTooltip";
+import Links from "@/components/Links";
+
+export const getTooltip = ({ post }: PostProps) => [
+    {
+        key: 1,
+        component: (
+            <UserTooltip user={post?.user}>
+                <Links url={`/users/${post?.user.username}`}>
+                    <UserAvatar avatarUrl={post?.user.avatarUrl} />
+                </Links>
+            </UserTooltip>
+        )
+    },
+    {
+        key: 2,
+        component: (
+            <UserTooltip user={post?.user}>
+                <Links className={styles.linkAvatarPost} url={`/users/${post?.user.username}`}>
+                    {post.user.displayName}
+                </Links>
+            </UserTooltip>
+        )
+    }
+]

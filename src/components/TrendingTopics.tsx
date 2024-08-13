@@ -1,6 +1,6 @@
 import { formatNumber, getTrendingTopics } from "@/lib/utils";
-import Link from "next/link";
 import styles from "../app/styles/rightMain.module.css"
+import Links from "./Links";
 
 export async function TrendingTopics() {
     const trendingTopics = await getTrendingTopics()
@@ -14,14 +14,14 @@ export async function TrendingTopics() {
                         {trendingTopics.length < 0 ? (
                             <p className={styles.parragrafhNoTrending}>No trending topics available</p>
                         ) : (
-                            <Link key={title} href={`/hashtag/${title}`} className="block">
+                            <Links key={title} url={`/hashtag/${title}`} className="block">
                                 <p className={styles.textPrincipal} title={hashtag}>
                                     {hashtag}
                                 </p>
                                 <div className={styles.containerFormatNumber}>
                                     {formatNumber(count)} {count < 1 ? 'post' : 'posts'}
                                 </div>
-                            </Link>
+                            </Links>
                         )}
                     </div>
                 )

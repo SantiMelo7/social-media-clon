@@ -5,6 +5,9 @@ import React from 'react'
 import { ThemeProvider } from "next-themes"
 import { Toaster } from '@/components/ui/toaster'
 import ReactQueryProvider from './ReactQueryProvider'
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
+import { extractRouterConfig } from 'uploadthing/server'
+import { fileRoute } from './api/uploadthing/core'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +24,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
+                <NextSSRPlugin routerConfig={extractRouterConfig(fileRoute)} />
                 <ReactQueryProvider>
                     <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>{children}</ThemeProvider>
                     <Toaster />

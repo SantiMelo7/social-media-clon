@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { menuBarData } from "@/util/menuBarData"
-import Link from "next/link"
 import styles from "../../app/styles/main.module.css"
 import { ClassNameProps } from "@/interfaces/classNameProps"
+import Links from "@/components/Links"
 
 export default function MenuBar({ className }: ClassNameProps) {
     return (
@@ -10,10 +10,10 @@ export default function MenuBar({ className }: ClassNameProps) {
             {menuBarData.map((text) => (
                 <div key={text.key}>
                     <Button variant="defaultNotBg" className={styles.buttonMenuBar} title={text.title} asChild>
-                        <Link href={text.href}>
+                        <Links url={text.href}>
                             {text.icon}
                             <span className={styles.responsiveTextTitle}>{text.title}</span>
-                        </Link>
+                        </Links>
                     </Button>
                 </div>
             ))}

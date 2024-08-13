@@ -3,7 +3,6 @@
 import { useSession } from "@/app/(main)/SessionProvider";
 import { DropdownMenu, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuSubContent } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
-import Link from "next/link";
 import { cn } from '../lib/utils';
 import styles from "../app/styles/main.module.css"
 import { getDropdownItems } from "@/util/dropwDownItems";
@@ -11,6 +10,7 @@ import { useTheme } from "next-themes";
 import { Check } from "lucide-react";
 import { ClassNameProps } from "@/interfaces/classNameProps";
 import { useQueryClient } from "@tanstack/react-query";
+import Links from "./Links";
 
 export default function UserButton({ className }: ClassNameProps) {
     const { user } = useSession()
@@ -34,12 +34,12 @@ export default function UserButton({ className }: ClassNameProps) {
                             </DropdownMenuLabel>
                         )}
                         {text.href && !text.onClick && (
-                            <Link href={text.href}>
+                            <Links url={text.href}>
                                 <DropdownMenuItem>
                                     {text.icon}
                                     {text.content}
                                 </DropdownMenuItem>
-                            </Link>
+                            </Links>
                         )}
                         {!text.href && text.onClick && !text.theme && (
                             <DropdownMenuItem onClick={text.onClick}>
