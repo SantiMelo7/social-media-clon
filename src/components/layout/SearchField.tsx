@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { SearchIcon } from "lucide-react";
 import styles from "../app/styles/main.module.css";
 

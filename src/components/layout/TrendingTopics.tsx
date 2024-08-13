@@ -1,6 +1,6 @@
 import { formatNumber, getTrendingTopics } from "@/lib/utils";
 import styles from "../app/styles/rightMain.module.css"
-import Links from "./Links";
+import Links from "./layout/Links";
 
 export async function TrendingTopics() {
     const trendingTopics = await getTrendingTopics()

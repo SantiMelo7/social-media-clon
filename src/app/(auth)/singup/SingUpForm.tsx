@@ -3,8 +3,8 @@
 import { singUpSchema, SingUp } from '../../../lib/validation';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { PasswordInput } from "../../../components/PasswordInput"
-import LoadingButton from '../../../components/LoadingButton';
+import { PasswordInput } from "../../../components/layout/PasswordInput"
+import LoadingButton from '../../../components/layout/LoadingButton';
 import FormFieldProps from '../../../components/layout/FormFieldProps'
 import LayoutForm from '../../../components/layout/LayoutForm';
 import { singUp } from './actions';

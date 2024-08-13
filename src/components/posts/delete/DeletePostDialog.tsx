@@ -1,6 +1,6 @@
 import { useDeletePostMutation } from "./mutation";
 import { Dialog, DialogFooter, DialogHeader, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import LoadingButton from "@/components/LoadingButton";
+import LoadingButton from "@/components/layout/LoadingButton";
 import { Button } from "@/components/ui/button";
 import styles from "../../../app/styles/main.module.css"
 import { DialogDeleteProps } from "@/interfaces/dialogProps";

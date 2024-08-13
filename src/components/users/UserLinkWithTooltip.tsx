@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { HTTPError } from "ky";
 import UserTooltip from "./UserTooltip";
 import styles from "../app/styles/main.module.css"
-import Links from "./Links";
+import Links from "../layout/Links";
 import { UserLinkWithTooltipProps } from "@/interfaces/userLinkWithTooltipProps";
 
 export default function UserLinkWithTooltip({ username, children }: UserLinkWithTooltipProps) {

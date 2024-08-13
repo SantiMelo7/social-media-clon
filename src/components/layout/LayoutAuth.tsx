@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from '../../app/styles/authentication.module.css';
 import { LayoutAuthProps } from '@/interfaces/ui';
-import Links from '../Links';
+import Links from './Links';
 
 export default function LayoutAuth({ children, img, title, description, link, linkText }: LayoutAuthProps) {
     return (

@@ -1,16 +1,16 @@
 "use client";
 
 import { useSession } from "@/app/(main)/SessionProvider";
-import { DropdownMenu, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuSubContent } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuSubContent } from "../ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
-import { cn } from '../lib/utils';
+import { cn } from '../../lib/utils';
 import styles from "../app/styles/main.module.css"
 import { getDropdownItems } from "@/util/dropwDownItems";
 import { useTheme } from "next-themes";
 import { Check } from "lucide-react";
 import { ClassNameProps } from "@/interfaces/classNameProps";
 import { useQueryClient } from "@tanstack/react-query";
-import Links from "./Links";
+import Links from "../layout/Links";
 
 export default function UserButton({ className }: ClassNameProps) {
     const { user } = useSession()

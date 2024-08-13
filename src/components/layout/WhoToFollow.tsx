@@ -5,7 +5,7 @@ import styles from "../app/styles/rightMain.module.css"
 import FollowButton from "./follow/FollowButton";
 import { getUserDataSelect } from "@/lib/types";
 import UserTooltip from "./UserTooltip";
-import Links from "./Links";
+import Links from "./layout/Links";
 
 export async function WhoToFollow() {
     const { user } = await validateRequest();

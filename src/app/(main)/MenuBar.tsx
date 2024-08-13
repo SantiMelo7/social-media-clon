@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { menuBarData } from "@/util/menuBarData"
 import styles from "../../app/styles/main.module.css"
 import { ClassNameProps } from "@/interfaces/classNameProps"
-import Links from "@/components/Links"
+import Links from "@/components/layout/Links"
 
 export default function MenuBar({ className }: ClassNameProps) {
     return (

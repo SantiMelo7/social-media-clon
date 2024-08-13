@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Input } from './ui/input';
-import { cn } from '../lib/utils';
+import { Input } from '../ui/input';
+import { cn } from '../../lib/utils';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import styles from '../app/styles/authentication.module.css'
 import { InputProps } from '@/interfaces/ui';
 

@@ -1,6 +1,6 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
 import styles from "../styles/main.module.css"
-import TrendsSidebar from "@/components/TrendsSidebar";
+import TrendsSidebar from "@/components/layout/TrendsSidebar";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { dataTabs } from "@/util/dataTabs";
 

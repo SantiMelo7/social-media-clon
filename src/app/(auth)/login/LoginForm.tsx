@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Login } from "../../../lib/validation"
 import FormFieldProps from "@/components/layout/FormFieldProps";
 import { Input } from "@/components/ui/input";
-import { PasswordInput } from "@/components/PasswordInput";
-import LoadingButton from '../../../components/LoadingButton';
+import { PasswordInput } from "@/components/layout/PasswordInput";
+import LoadingButton from '../../../components/layout/LoadingButton';
 import { login } from "./actions";
 import { useState } from "react";
 

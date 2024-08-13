@@ -6,7 +6,7 @@ import { useSession } from "@/app/(main)/SessionProvider";
 import { PostProps } from "@/interfaces/postProps";
 import LinkiFy from "../linkify/LinkiFy";
 import { getTooltip } from "@/util/getTooltip";
-import Links from "../Links";
+import Links from "../layout/Links";
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()

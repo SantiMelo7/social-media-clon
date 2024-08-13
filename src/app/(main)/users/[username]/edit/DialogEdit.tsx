@@ -7,11 +7,11 @@ import LayoutForm from "@/components/layout/LayoutForm";
 import { Input } from "@/components/ui/input";
 import FormFieldProps from "@/components/layout/FormFieldProps";
 import { Textarea } from "@/components/ui/textarea";
-import LoadingButton from "@/components/LoadingButton";
+import LoadingButton from "@/components/layout/LoadingButton";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import AvatarImg from "../../../../../../public/assets/avatar-placeholder.png"
-import { AvatarInput } from "@/components/AvatarInput";
+import { AvatarInput } from "@/components/layout/AvatarInput";
 
 export default function DialogEdit({ open, data, onOpenChange }: DialogEditProps) {
 

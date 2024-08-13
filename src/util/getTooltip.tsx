@@ -2,7 +2,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { PostProps } from "@/interfaces/postProps";
 import styles from "../app/styles/main.module.css"
 import UserTooltip from "@/components/UserTooltip";
-import Links from "@/components/Links";
+import Links from "@/components/layout/Links";
 
 export const getTooltip = ({ post }: PostProps) => [
     {

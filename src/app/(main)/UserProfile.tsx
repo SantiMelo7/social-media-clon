@@ -1,7 +1,7 @@
 import FollowButton from "@/components/follow/FollowButton";
 import FollowerCount from "@/components/follow/FollowerCount";
 import LinkiFy from "@/components/linkify/LinkiFy";
-import UserAvatar from "@/components/UserAvatar";
+import UserAvatar from "@/components/users/UserAvatar";
 import { UserProfileProps } from "@/interfaces/userProfileProps";
 import { formatNumber } from "@/lib/utils";
 import { followerState } from "@/util/followerState";

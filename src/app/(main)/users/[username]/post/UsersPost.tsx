@@ -6,7 +6,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import styles from "../../../../../app/styles/rightMain.module.css"
 import stylesMain from "../../../../../app/styles/main.module.css"
 import kyInstance from "@/lib/ky"
-import InfiniteScrollContainer from "@/components/InfiniteScrollContainer"
+import InfiniteScrollContainer from "@/components/layout/InfiniteScrollContainer"
 import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton"
 import { UserPostsProps } from "@/interfaces/userPostsProps"
 
