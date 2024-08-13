@@ -23,7 +23,7 @@ export async function WhoToFollow() {
             }
         },
         select: getUserDataSelect(user.id),
-        take: 5,
+        take: 3,
     });
 
     return (
