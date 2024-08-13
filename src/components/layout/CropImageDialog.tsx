@@ -1,44 +1,25 @@
-import { useRef } from "react";
-import { Cropper, ReactCropperElement } from "react-cropper"
-import { Dialog, DialogFooter, DialogContent, DialogTitle } from "../ui/dialog";
+import { Cropper } from "react-cropper"
 import { Button } from "../ui/button";
 import "cropperjs/dist/cropper.css"
-
-interface CropImageDialogProps {
-    src: string,
-    cropAspectRatio: number;
-    onCropped: (bio: Blob | null) => void,
-    onClose: () => void
-}
+import DialogUi from "./DialogUi";
+import { CropImageDialogProps } from "@/interfaces/cropImageDialogProps";
+import { useCropImageDialog } from "@/hooks/useCropImageDialog";
 
 export default function CropImageDialog({ src, cropAspectRatio, onCropped, onClose }: CropImageDialogProps) {
-    const croperRef = useRef<ReactCropperElement>(null)
-
-    function crop() {
-        const cropper = croperRef.current?.cropper
-        if (!cropper) return
-        cropper.getCroppedCanvas().toBlob((blog) => onCropped(blog), "image/webp")
-        onClose()
-    }
-
+    const { croperRef, crop } = useCropImageDialog(onCropped, onClose)
     return (
-        <Dialog open onOpenChange={onClose}>
-            <DialogContent>
-                <DialogTitle>Crop Image</DialogTitle>
-                <Cropper
-                    src={src}
-                    aspectRatio={cropAspectRatio}
-                    guides={false}
-                    zoomable={false}
-                    ref={croperRef}
-                    className="mx-auto size-fut"
-                />
-                <DialogFooter>
+        <DialogUi open openChange={onClose} title="Delete post?" dialogDesc dialogFooter
+            description="Are you sure want to delete this post? This action cannot be undone"
+            childrenFooter={
+                <>
                     <Button variant="secondary" onClick={onClose}>Cancel</Button>
                     <Button onClick={crop}>Crop</Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+                </>
+            }
+        >
+            <Cropper src={src} aspectRatio={cropAspectRatio} guides={false} zoomable={false}
+                ref={croperRef} className="mx-auto size-fit"
+            />
+        </DialogUi>
     )
-
 }
