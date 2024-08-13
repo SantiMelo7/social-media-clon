@@ -1,22 +1,14 @@
 import FollowButton from "@/components/follow/FollowButton";
 import FollowerCount from "@/components/follow/FollowerCount";
-import { Button } from "@/components/ui/button";
+import LinkiFy from "@/components/linkify/LinkiFy";
 import UserAvatar from "@/components/UserAvatar";
-import { FollowerInfo, UserData } from "@/lib/types";
+import { UserProfileProps } from "@/interfaces/userProfileProps";
 import { formatNumber } from "@/lib/utils";
+import { followerState } from "@/util/followerState";
 import { formatDate } from "date-fns";
-
-interface UserProfileProps {
-    user: UserData;
-    loggedInUserId: string
-}
+import EditProfileButton from "./users/[username]/edit/EditProfileButton";
 
 async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
-    const followerInfo: FollowerInfo = {
-        followers: user._count.followers,
-        isFollowedByUser: user.followers.some(
-            ({ followerId }) => followerId === loggedInUserId)
-    }
     return (
         <div className="w-full h-fit space-y-5 bg-card shadow-sm p-5">
             <UserAvatar
@@ -38,22 +30,21 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
                                 {formatNumber(user._count.posts)}
                             </span>
                         </span>
-                        <FollowerCount userId={user.id} initialState={followerInfo} />
+                        <FollowerCount userId={user.id} initialState={followerState(user, loggedInUserId)} />
                     </div>
                 </div>
                 {user.id === loggedInUserId ? (
-                    <Button >Edit Profile</Button>
+                    <EditProfileButton user={user} />
                 ) : (
-                    <FollowButton userId={user.id} initialState={followerInfo} ></FollowButton>
+                    <FollowButton userId={user.id} initialState={followerState(user, loggedInUserId)}></FollowButton>
                 )}
             </div>
             {user.bio && (
-                <>
-                    <hr />
+                <LinkiFy>
                     <div className="whitespace-pre-line overflow-hidden break-words">
                         {user.bio}
                     </div>
-                </>
+                </LinkiFy>
             )}
         </div>
     )
