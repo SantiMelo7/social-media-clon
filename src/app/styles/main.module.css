@@ -185,3 +185,7 @@
 .animationThreePunts {
     @apply opacity-0 transition-opacity;
 }
+
+.contentLinks {
+    @apply text-primary hover:underline;
+}

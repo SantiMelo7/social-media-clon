@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import styles from '../../app/styles/authentication.module.css';
-import Link from 'next/link';
 import { LayoutAuthProps } from '@/interfaces/ui';
+import Links from '../Links';
 
 export default function LayoutAuth({ children, img, title, description, link, linkText }: LayoutAuthProps) {
     return (
@@ -20,9 +20,9 @@ export default function LayoutAuth({ children, img, title, description, link, li
                             <div className={styles.spaceFormTop}>
                                 {children}
                             </div>
-                            <Link href={link} className={styles.linkToRedirect}>
+                            <Links url={link} className={styles.linkToRedirect}>
                                 {linkText}
-                            </Link>
+                            </Links>
                         </div>
                     </div>
                 </div>
