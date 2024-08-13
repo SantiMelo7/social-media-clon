@@ -8,12 +8,15 @@ import UserAvatar from "@/components/users/UserAvatar";
 import styles from "../../../app/styles/main.module.css"
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/layout/LoadingButton";
+import useMediaUpload from "./useMediaUpload";
 
 export default function PostEditor() {
 
     const { user } = useSession()
 
     const mutation = useSubmitPostMutation()
+
+    const { startUpload, attachments, isUploading, uploadProgress, removeAttachment, reset } = useMediaUpload()
 
     const editor = useEditor({
         extensions: [
@@ -32,7 +35,10 @@ export default function PostEditor() {
     }) || ""
 
     function handleSubmit() {
-        mutation.mutate(input, {
+        mutation.mutate({
+            content: input,
+            mediaIds: attachments.map(a => a.mediaId).filter(Boolean) as string[],
+        }, {
             onSuccess: () => {
                 editor?.commands.clearContent()
             }
