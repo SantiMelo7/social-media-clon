@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image"
 import { useRef, useState } from "react"
 import Resizer from "react-image-file-resizer"
-import { Input } from "./ui/input"
+import { Input } from "../ui/input"
 import { Camera } from "lucide-react"
 import CropImageDialog from "./CropImageDialog"
 
