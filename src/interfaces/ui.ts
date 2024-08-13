@@ -4,6 +4,7 @@ import { buttonVariants } from "../cvaConfig"
 import { DefaultValues, FieldValues, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode } from 'react';
+import { ClassNameProps } from "./classNameProps";
 
 export interface ButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -18,7 +19,7 @@ export interface LoadingButtonProps extends ButtonProps {
 export interface InputProps
     extends React.InputHTMLAttributes<HTMLInputElement> { }
 
-export interface LayoutFormProps<TFieldValues extends FieldValues> {
+export interface LayoutFormProps<TFieldValues extends FieldValues> extends ClassNameProps {
     children: (form: UseFormReturn<TFieldValues> & { isPending: boolean }) => ReactNode;
     onSubmit: (values: TFieldValues) => Promise<void>;
     defaultValues: DefaultValues<TFieldValues>;
