@@ -3,7 +3,7 @@ import TrendsSidebar from "@/components/TrendsSidebar"
 import { Metadata } from "next"
 import UserProfile from "../../UserProfile"
 import { getUser } from "@/util/getUser"
-import UserPosts from "./UsersPost"
+import UserPosts from "./post/UsersPost"
 
 export async function generateMetadata({ params: { username } }: PageUserProfileProps): Promise<Metadata> {
     const { user } = await validateRequest()

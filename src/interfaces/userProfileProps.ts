@@ -1,5 +1,5 @@
-import { UserData } from "@/lib/types";
+import { UserDataProps } from "./userData";
 
-export interface UserProfileProps extends UserData {
+export interface UserProfileProps extends UserDataProps {
     loggedInUserId: string
 }

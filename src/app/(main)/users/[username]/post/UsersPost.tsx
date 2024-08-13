@@ -3,15 +3,12 @@
 import Post from "@/components/posts/Post"
 import { PostsPage } from "@/lib/types"
 import { useInfiniteQuery } from "@tanstack/react-query"
-import styles from "../../../../app/styles/rightMain.module.css"
-import stylesMain from "../../../../app/styles/main.module.css"
+import styles from "../../../../../app/styles/rightMain.module.css"
+import stylesMain from "../../../../../app/styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer"
 import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton"
-
-interface UserPostsProps {
-    userId: string
-}
+import { UserPostsProps } from "@/interfaces/userPostsProps"
 
 export default function UserPosts({ userId }: UserPostsProps) {
     const {
