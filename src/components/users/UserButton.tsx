@@ -4,7 +4,7 @@ import { useSession } from "@/app/(main)/SessionProvider";
 import { DropdownMenu, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuPortal, DropdownMenuSubContent } from "../ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
 import { cn } from '../../lib/utils';
-import styles from "../app/styles/main.module.css"
+import styles from "../../app/styles/main.module.css"
 import { getDropdownItems } from "@/util/dropwDownItems";
 import { useTheme } from "next-themes";
 import { Check } from "lucide-react";

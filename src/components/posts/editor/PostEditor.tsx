@@ -4,7 +4,7 @@ import { EditorContent, useEditor } from "@tiptap/react"
 import StartetKit from "@tiptap/starter-kit"
 import Placeholder from "@tiptap/extension-placeholder"
 import { useSession } from "@/app/(main)/SessionProvider";
-import UserAvatar from "@/components/UserAvatar";
+import UserAvatar from "@/components/users/UserAvatar";
 import styles from "../../../app/styles/main.module.css"
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/layout/LoadingButton";

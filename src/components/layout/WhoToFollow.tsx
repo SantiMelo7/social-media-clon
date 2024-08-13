@@ -1,11 +1,11 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import UserAvatar from "./UserAvatar";
-import styles from "../app/styles/rightMain.module.css"
-import FollowButton from "./follow/FollowButton";
+import UserAvatar from "../users/UserAvatar";
+import styles from "../../app/styles/rightMain.module.css"
+import FollowButton from "../follow/FollowButton";
 import { getUserDataSelect } from "@/lib/types";
-import UserTooltip from "./UserTooltip";
-import Links from "./layout/Links";
+import UserTooltip from "../users/UserTooltip";
+import Links from "../layout/Links";
 
 export async function WhoToFollow() {
     const { user } = await validateRequest();

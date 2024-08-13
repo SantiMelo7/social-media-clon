@@ -1,5 +1,5 @@
 import { validateRequest } from "@/auth"
-import TrendsSidebar from "@/components/TrendsSidebar"
+import TrendsSidebar from "@/components/layout/TrendsSidebar"
 import { Metadata } from "next"
 import UserProfile from "../../UserProfile"
 import { getUser } from "@/util/getUser"

@@ -5,7 +5,7 @@ import { UserData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { HTTPError } from "ky";
 import UserTooltip from "./UserTooltip";
-import styles from "../app/styles/main.module.css"
+import styles from "../../app/styles/main.module.css"
 import Links from "../layout/Links";
 import { UserLinkWithTooltipProps } from "@/interfaces/userLinkWithTooltipProps";
 

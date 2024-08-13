@@ -1,6 +1,6 @@
 import { LinkFyPropsGeneric } from "@/interfaces/linkFyPropsGeneric"
 import { LinkIt } from "react-linkify-it"
-import UserLinkWithTooltip from "../UserLinkWithTooltip"
+import UserLinkWithTooltip from "../users/UserLinkWithTooltip"
 
 export function LinkFyProps({ regex, children }: LinkFyPropsGeneric) {
     return (

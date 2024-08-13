@@ -1,14 +1,14 @@
 "use client"
 
 import { useSession } from "@/app/(main)/SessionProvider";
-import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "./ui/tooltip"
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "../ui/tooltip"
 import UserAvatar from "./UserAvatar";
-import FollowButton from "./follow/FollowButton";
-import LinkiFy from "./linkify/LinkiFy";
-import FollowerCount from './follow/FollowerCount';
+import FollowButton from "../follow/FollowButton";
+import LinkiFy from "../linkify/LinkiFy";
+import FollowerCount from '../follow/FollowerCount';
 import { UserTooltipProps } from "@/interfaces/userTooltipProps";
 import { followerState } from "@/util/followerState";
-import Links from "./Links";
+import Links from "../layout/Links";
 
 export default function UserTooltip({ children, user }: UserTooltipProps) {
     const { user: loggedInUser } = useSession()

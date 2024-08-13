@@ -1,8 +1,8 @@
 import Image from "next/image";
-import AvatarImg from "../../public/assets/avatar-placeholder.png"
+import AvatarImg from "../../../public/assets/avatar-placeholder.png"
 import { cn } from "@/lib/utils";
 import { UserAvatarProps } from "@/interfaces/userAvatarProps";
-import styles from "../app/styles/main.module.css";
+import styles from "../../app/styles/main.module.css";
 
 export default function UserAvatar({ avatarUrl, size, className }: UserAvatarProps) {
     return (
