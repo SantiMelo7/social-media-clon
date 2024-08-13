@@ -6,16 +6,17 @@ import { PostProps } from "./postProps";
 type OnCloseFunction = (open: boolean) => void | (() => void);
 
 export interface DialogProps {
-    data: UserData | PostData;
     open: boolean;
     onOpenChange: OnCloseFunction
 }
 
 export interface DialogEditProps extends DialogProps {
+    data: UserData;
     onOpenChange: (open: boolean) => void
 }
 
 export interface DialogDeleteProps extends DialogProps {
+    data: PostData;
     onOpenChange: () => void
 }
 

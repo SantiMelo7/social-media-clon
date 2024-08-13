@@ -40,11 +40,17 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
                 )}
             </div>
             {user.bio && (
-                <LinkiFy>
-                    <div className="whitespace-pre-line overflow-hidden break-words">
-                        {user.bio}
+                <>
+                    <div className="space-y-2">
+                        <span>Bio:</span>
+                        <hr className="border-[1.5px] border-primary" />
                     </div>
-                </LinkiFy>
+                    <LinkiFy>
+                        <div className="whitespace-pre-line overflow-hidden break-words">
+                            {user.bio}
+                        </div>
+                    </LinkiFy>
+                </>
             )}
         </div>
     )
