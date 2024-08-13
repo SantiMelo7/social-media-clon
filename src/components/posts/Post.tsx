@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { formatedRelativeDate } from '../../lib/utils';
 import styles from "../../app/styles/main.module.css"
 import PostMoreButton from './PostMoreButton';
@@ -7,6 +6,7 @@ import { PostProps } from "@/interfaces/postProps";
 import LinkiFy from "../linkify/LinkiFy";
 import { getTooltip } from "@/util/getTooltip";
 import Links from "../layout/Links";
+import { MediaPreviews } from './MediaPreviews';
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
@@ -31,6 +31,9 @@ export default function Post({ post }: PostProps) {
             <LinkiFy>
                 <div className={styles.contentPost}>{post.content}</div>
             </LinkiFy>
+            {!!post.attachments?.length && (
+                <MediaPreviews attachments={post.attachments} />
+            )}
         </article>
     )
 }

@@ -8,7 +8,7 @@ export const getTooltip = ({ post }: PostProps) => [
     {
         key: 1,
         component: (
-            <UserTooltip user={post?.user}>
+            <UserTooltip user={post.user}>
                 <Links url={`/users/${post?.user.username}`}>
                     <UserAvatar avatarUrl={post?.user.avatarUrl} />
                 </Links>
@@ -18,7 +18,7 @@ export const getTooltip = ({ post }: PostProps) => [
     {
         key: 2,
         component: (
-            <UserTooltip user={post?.user}>
+            <UserTooltip user={post.user}>
                 <Links className={styles.linkAvatarPost} url={`/users/${post?.user.username}`}>
                     {post.user.displayName}
                 </Links>
