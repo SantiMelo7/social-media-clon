@@ -50,8 +50,7 @@ export const fileRoute = {
         .onUploadComplete(async ({ file }) => {
             const media = await prisma.media.create({
                 data: {
-                    id: file.key,
-                    url: keyUrlF(file),
+                    url: file.url.replace("/f/", `/a/${process.env.UPLOADTHING_APP_ID}/`),
                     type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
                 },
             });

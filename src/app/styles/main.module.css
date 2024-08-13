@@ -87,7 +87,7 @@
 }
 
 .containerButtonPosts {
-    @apply flex justify-end;
+    @apply flex justify-end gap-x-3 items-center;
 }
 
 .buttonPostCreate {
