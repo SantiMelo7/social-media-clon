@@ -21,7 +21,6 @@ export default async function RootLayout({
                     <MenuBar className={styles.menuBarLayout} />
                     {children}
                 </div>
-                <MenuBar className={styles.menuBarLayoutSecondary} />
             </div>
         </SessionProvider>
     )
