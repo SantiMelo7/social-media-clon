@@ -1,5 +1,6 @@
-export interface UserAvatarProps {
+import { ClassNameProps } from "./classNameProps";
+
+export interface UserAvatarProps extends ClassNameProps {
     avatarUrl: string | null;
     size?: number;
-    className?: string;
 }
