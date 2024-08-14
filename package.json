@@ -28,6 +28,7 @@
     "@tiptap/react": "^2.5.7",
     "@tiptap/starter-kit": "^2.5.7",
     "@uploadthing/react": "^6.7.2",
+    "antd": "^5.20.1",
     "arctic": "^1.9.2",
     "argon2": "^0.40.3",
     "class-variance-authority": "^0.7.0",

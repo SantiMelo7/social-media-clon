@@ -78,10 +78,6 @@
     @apply flex gap-5;
 }
 
-.userAvatarResponsive {
-    @apply hidden sm:inline;
-}
-
 .editorContent {
     @apply w-full max-h-[20rem] overflow-y-auto bg-gray-200 rounded-2xl px-5 py-3;
 }

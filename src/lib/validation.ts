@@ -16,7 +16,7 @@ export const singUpSchema = z.object({
 export type SingUp = z.infer<typeof singUpSchema>
 
 export const loginSchema = z.object({
-    username: requiredString,
+    displayName: requiredString,
     password: requiredString,
 })
 

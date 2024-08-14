@@ -1,10 +1,10 @@
 import { MediaPreviewProps } from "@/interfaces/media"
-import Image from "next/image"
+import { Image } from "antd"
 
 export function MediaPreview({ media }: MediaPreviewProps) {
     if (media.type === "IMAGE") {
         return (
-            <Image src={media.url} alt='Attachments' width={500} height={500} className='mx-auto size-fit object-cover rounded-[2xl]' />
+            <Image src={media.url} alt='Attachments' className='mx-auto size-fit object-fill rounded-2xl' />
         )
     }
     if (media.type === "VIDEO") {
