@@ -11,16 +11,18 @@ import Links from "../layout/Links";
 import { MediaPreviews } from './MediaPreviews';
 import LikeButton from './like/LikeButton';
 import BookMarkButton from './bookmark/BookMarkButton';
+import { useState } from 'react';
+import Comments from './comments/Comments';
+import { CommentButton } from './comments/CommentButton';
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
     const dataTooltip = getTooltip({ post })
-
-    console.log({ post });
+    const [showComments, setShowComments] = useState(false)
 
     return (
-        <Links url={`/posts/${post.id}`}>
-            <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
+        <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
+            <Links url={`/posts/${post.id}`}>
                 <div className={styles.containerEndMain}>
                     <div className={styles.containerTextWrap}>
                         {dataTooltip[0].component}
@@ -38,27 +40,28 @@ export default function Post({ post }: PostProps) {
                 <LinkiFy>
                     <div className={styles.contentPost}>{post.content}</div>
                 </LinkiFy>
-                {!!post.attachments?.length && (
-                    <MediaPreviews attachments={post.attachments} />
-                )}
-                <br />
-                <div className='flex justify-between p-2'>
-                    <LikeButton
-                        postId={post.id}
-                        initialState={{
-                            likes: post._count.likes,
-                            isLikeByUser: post.likes.some((like) => like.userId === user.id)
-                        }}
+            </Links>
+            {!!post.attachments?.length && (
+                <MediaPreviews attachments={post.attachments} />
+            )}
+            <br />
+            <div className='flex justify-between p-2'>
+                <div className='flex items-center gap-5'>
+                    <LikeButton postId={post.id} initialState={{
+                        likes: post._count.likes,
+                        isLikeByUser: post.likes.some((like) => like.userId === user.id)
+                    }}
                     />
-                    <BookMarkButton
-                        postId={post.id}
-                        initialState={{
-                            isBookmarkByUser: post.bookmarks.some((bookmark) => bookmark.userId === user.id)
-                        }}
-                    />
+                    <CommentButton post={post} onClick={() => setShowComments(!showComments)} />
                 </div>
-            </article>
-        </Links>
-
+                <BookMarkButton postId={post.id} initialState={{
+                    isBookmarkByUser: post.bookmarks.some((bookmark) => bookmark.userId === user.id)
+                }}
+                />
+            </div>
+            {showComments && (
+                <Comments post={post} />
+            )}
+        </article>
     )
 }
