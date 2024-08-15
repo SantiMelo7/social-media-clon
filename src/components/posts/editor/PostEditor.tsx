@@ -9,7 +9,6 @@ import AddAtachmentButton from "./attachment/AddAtachmentButton";
 import AttachmentPreviews from "./attachment/AttachmentPreviews";
 import Loading from "@/app/loading";
 import { cn } from '../../../lib/utils';
-import { usePostEditor } from "@/hooks/usePostEditor";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { useSubmitPostMutation } from "./mutations";
 import { useDropzone } from "@uploadthing/react";
@@ -70,10 +69,10 @@ export default function PostEditor() {
             )}
             <div className={styles.containerButtonPosts}>
                 {isUploading && (
-                    <>
-                        <span className="text-sm">{uploadProgress ?? 0}%</span>
+                    <div className="flex items-center gap-x-3 mr-2">
+                        <span className="text-sm font-semibold text-green-800">{uploadProgress ?? 0}%</span>
                         <Loading className="text-primary" />
-                    </>
+                    </div>
                 )}
                 <AddAtachmentButton onFilesSelected={startUpload} disabled={isUploading || attachments.length >= 5} />
                 <LoadingButton variant="default" onClick={handleSubmit}

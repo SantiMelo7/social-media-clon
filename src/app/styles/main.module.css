@@ -87,7 +87,7 @@
 }
 
 .buttonPostCreate {
-    @apply max-w-20;
+    @apply max-w-32;
 }
 
 .buttonMenuBar {
@@ -119,7 +119,7 @@
 }
 
 .contentPost {
-    @apply whitespace-pre-line break-words;
+    @apply whitespace-pre-line break-words mt-1 p-2;
 }
 
 .containerInfiniteScroll {
