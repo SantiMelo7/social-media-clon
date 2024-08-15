@@ -14,7 +14,7 @@ import { useSubmitPostMutation } from "./mutations";
 import { useDropzone } from "@uploadthing/react";
 import StartetKit from "@tiptap/starter-kit"
 import Placeholder from "@tiptap/extension-placeholder"
-import { ClipboardEvent } from "react";
+import { ClipboardEvent, useEffect, useState } from "react";
 
 export default function PostEditor() {
     const { user } = useSession()
@@ -24,14 +24,32 @@ export default function PostEditor() {
         onDrop: startUpload
     })
 
-    const { onClick, ...rootProps } = getRootProps()
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const editor = useEditor({
         extensions: [
             StartetKit.configure({ bold: false, italic: false }),
             Placeholder.configure({ placeholder: "Whats crack-a-lacking?" })
         ],
-    })
+        content: '<p>Hello World!</p>',
+        immediatelyRender: false,
+    });
+
+    useEffect(() => {
+        return () => {
+            editor?.destroy();
+        };
+    }, [editor]);
+
+    if (!isClient) {
+        return null;
+    }
+
+    const { onClick, ...rootProps } = getRootProps()
 
     const input = editor?.getText({ blockSeparator: "\n" }) || ""
 
@@ -54,13 +72,12 @@ export default function PostEditor() {
         startUpload(files)
     }
 
-
     return (
         <div className={styles.containerPostEditor}>
             <div className={styles.containerUserAndEditor}>
                 <UserAvatar avatarUrl={user.avatarUrl} />
                 <div {...rootProps} className="w-full">
-                    <EditorContent onPaste={onPaste} editor={editor} className={cn(styles.editorContent, isDragActive && "outline-dashed")} />
+                    {editor && <EditorContent onPaste={onPaste} editor={editor} className={cn(styles.editorContent, isDragActive && "outline-dashed")} />}
                 </div>
                 <input {...getInputProps()} />
             </div>

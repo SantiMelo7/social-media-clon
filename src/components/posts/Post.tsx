@@ -16,6 +16,8 @@ export default function Post({ post }: PostProps) {
     const { user } = useSession()
     const dataTooltip = getTooltip({ post })
 
+    console.log({ post });
+
     return (
         <Links url={`/posts/${post.id}`}>
             <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">

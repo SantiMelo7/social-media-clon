@@ -20,7 +20,6 @@ export function getUserDataSelect(loggedInUserId: string) {
             select: {
                 followers: true,
                 posts: true,
-                likes: true
             },
         },
     } satisfies Prisma.UserSelect;
@@ -54,7 +53,7 @@ export function getPostDataInclude(loggedInUser: string) {
         },
         _count: {
             select: {
-                likes: true
+                likes: true,
             },
         },
     } satisfies Prisma.PostInclude;
