@@ -79,5 +79,5 @@
 }
 
 .animateSpin {
-  @apply mx-auto animate-spin my-3
+  @apply mx-auto animate-spin my-3;
 }

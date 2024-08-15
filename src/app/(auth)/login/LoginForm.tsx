@@ -20,13 +20,13 @@ export default function LoginForm() {
     return (
         <LayoutForm
             onSubmit={handleLogin}
-            defaultValues={{ username: "", password: "" }}
+            defaultValues={{ displayName: "", password: "" }}
             resolver={zodResolver(loginSchema)}
         >
             {({ isPending, ...form }) => (
                 <>
                     {error && <p className="text-center text-destructive">{error}</p>}
-                    <FormFieldProps form={form} name="username" label="Username">
+                    <FormFieldProps form={form} name="displayName" label="Display Name">
                         {(field) => <Input placeholder="Ingresa tu número de usuario" {...field} />}
                     </FormFieldProps>
                     <FormFieldProps name="password" form={form} label="Password">

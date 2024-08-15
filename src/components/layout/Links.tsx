@@ -3,6 +3,6 @@ import Link from "next/link";
 
 export default function Links({ children, className, url }: LinksProps) {
     return (
-        <Link className={className} href={url || ''}>{children}</Link>
+        <Link suppressContentEditableWarning className={className} href={url || ''}>{children}</Link>
     )
 }
