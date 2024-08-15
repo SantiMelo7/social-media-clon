@@ -78,10 +78,6 @@
     @apply flex gap-5;
 }
 
-.userAvatarResponsive {
-    @apply hidden sm:inline;
-}
-
 .editorContent {
     @apply w-full max-h-[20rem] overflow-y-auto bg-gray-200 rounded-2xl px-5 py-3;
 }
@@ -91,7 +87,7 @@
 }
 
 .buttonPostCreate {
-    @apply max-w-20;
+    @apply max-w-32;
 }
 
 .buttonMenuBar {
@@ -123,7 +119,7 @@
 }
 
 .contentPost {
-    @apply whitespace-pre-line break-words;
+    @apply whitespace-pre-line break-words mt-1 p-2;
 }
 
 .containerInfiniteScroll {

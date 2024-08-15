@@ -20,6 +20,7 @@ export function getUserDataSelect(loggedInUserId: string) {
             select: {
                 followers: true,
                 posts: true,
+                likes: true
             },
         },
     } satisfies Prisma.UserSelect;
@@ -34,7 +35,28 @@ export function getPostDataInclude(loggedInUser: string) {
         user: {
             select: getUserDataSelect(loggedInUser),
         },
-        attachments: true
+        attachments: true,
+        likes: {
+            where: {
+                userId: loggedInUser
+            },
+            select: {
+                userId: true
+            }
+        },
+        bookmarks: {
+            where: {
+                userId: loggedInUser
+            },
+            select: {
+                userId: true
+            }
+        },
+        _count: {
+            select: {
+                likes: true
+            },
+        },
     } satisfies Prisma.PostInclude;
 }
 
@@ -50,4 +72,13 @@ export interface PostsPage {
 export interface FollowerInfo {
     followers: number;
     isFollowedByUser: boolean;
+}
+
+export interface LikesInfo {
+    likes: number;
+    isLikeByUser: boolean;
+}
+
+export interface BookmarksInfo {
+    isBookmarkByUser: boolean;
 }

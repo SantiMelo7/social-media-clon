@@ -10,19 +10,21 @@ datasource db {
 }
 
 model User {
-  id          String    @id
-  username    String    @unique
-  displayName String    @unique
-  email       String?   @unique
+  id          String     @id
+  username    String     @unique
+  displayName String     @unique
+  email       String?    @unique
   password    String?
-  googleId    String?   @unique
+  googleId    String?    @unique
   avatarUrl   String?
   bio         String?
-  createAd    DateTime  @default(now())
+  createAd    DateTime   @default(now())
   session     Session[]
   posts       Post[]
-  following   Follow[]  @relation("Following")
-  followers   Follow[]  @relation("Followers")
+  following   Follow[]   @relation("Following")
+  followers   Follow[]   @relation("Followers")
+  likes       Like[]
+  bookmarks   Bookmark[]
 
   @@map("users")
 }
@@ -47,12 +49,14 @@ model Session {
 }
 
 model Post {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   content     String
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   attachments Media[]
-  createAd    DateTime @default(now())
+  likes       Like[]
+  bookmarks   Bookmark[]
+  createAd    DateTime   @default(now())
 
   @@map("posts")
 }
@@ -72,4 +76,27 @@ model Media {
 enum MediaType {
   IMAGE
   VIDEO
+}
+
+model Like {
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@map("likes")
+}
+
+model Bookmark {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createAd DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@map("bookmarks")
 }
