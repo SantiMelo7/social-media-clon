@@ -22,27 +22,31 @@ export default function Post({ post }: PostProps) {
 
     return (
         <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
-            <Links url={`/posts/${post.id}`}>
-                <div className={styles.containerEndMain}>
-                    <div className={styles.containerTextWrap}>
-                        {dataTooltip[0].component}
-                        <div>
-                            {dataTooltip[1].component}
-                            <p className={styles.linkUsernamePost}>
-                                {formatedRelativeDate(post.createAd)}
-                            </p>
-                        </div>
+            <div className={styles.containerEndMain}>
+                <div className={styles.containerTextWrap}>
+                    {dataTooltip[0].component}
+                    <div>
+                        {dataTooltip[1].component}
+                        <p className={styles.linkUsernamePost}>
+                            {formatedRelativeDate(post.createAd)}
+                        </p>
                     </div>
-                    {post.user.id === user?.id && (
-                        <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
-                    )}
                 </div>
-                <LinkiFy>
-                    <div className={styles.contentPost}>{post.content}</div>
-                </LinkiFy>
-            </Links>
+                {post.user.id === user?.id && (
+                    <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
+                )}
+            </div>
+            <LinkiFy>
+                {!post.attachments.length ? (
+                    <Links url={`/posts/${post.id}`}>
+                        <div className={styles.contentPost}>{post.content}</div>
+                    </Links>
+                ) : <div className={styles.contentPost}>{post.content}</div>}
+            </LinkiFy>
             {!!post.attachments?.length && (
-                <MediaPreviews attachments={post.attachments} />
+                <Links url={`/posts/${post.id}`}>
+                    <MediaPreviews attachments={post.attachments} />
+                </Links>
             )}
             <br />
             <div className='flex justify-between p-2'>
