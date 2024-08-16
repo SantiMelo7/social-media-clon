@@ -11,14 +11,22 @@ import Links from "../layout/Links";
 import { MediaPreviews } from './MediaPreviews';
 import LikeButton from './like/LikeButton';
 import BookMarkButton from './bookmark/BookMarkButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Comments from './comments/Comments';
 import { CommentButton } from './comments/CommentButton';
+import { usePathname } from 'next/navigation';
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
     const dataTooltip = getTooltip({ post })
     const [showComments, setShowComments] = useState(false)
+    const pathName = usePathname()
+
+    useEffect(() => {
+        if (pathName === `/posts/${post.id}`) {
+            return setShowComments(true)
+        };
+    }, [pathName, post.id])
 
     return (
         <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
