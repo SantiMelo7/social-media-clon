@@ -35,7 +35,6 @@ export default function PostEditor() {
             StartetKit.configure({ bold: false, italic: false }),
             Placeholder.configure({ placeholder: "Whats crack-a-lacking?" })
         ],
-        content: '<p>Hello World!</p>',
         immediatelyRender: false,
     });
 

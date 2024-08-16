@@ -1,8 +1,9 @@
-import { PostData } from "@/lib/types";
+import { CommentData, PostData } from "@/lib/types";
 import { ClassNameProps } from "./classNameProps";
 import { UserData } from '../lib/types';
 import { PostProps } from "./postProps";
 import { childrenNormal } from "./ui";
+import { CommentProps } from "./commentProps";
 
 export interface DialogProps {
     open: boolean;
@@ -19,6 +20,11 @@ export interface DialogDeleteProps extends DialogProps {
     onOpenChange: () => void
 }
 
+export interface DialogDeleteCommentProps extends DialogProps {
+    data: CommentData;
+    onOpenChange: () => void;
+}
+
 export interface DialogUiProps extends childrenNormal, DialogProps {
     title: string;
     description?: string;
@@ -28,3 +34,5 @@ export interface DialogUiProps extends childrenNormal, DialogProps {
 }
 
 export interface PostMoreButtonProps extends ClassNameProps, PostProps { }
+
+export interface CommentMoreButtonProps extends ClassNameProps, CommentProps { }

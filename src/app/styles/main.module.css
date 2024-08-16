@@ -171,11 +171,19 @@
 }
 
 .containerTrash {
-    @apply flex items-center gap-3 text-destructive;
+    @apply flex justify-center text-sm items-center font-medium gap-3 text-destructive;
+}
+
+.containerDropwDownMenuItem {
+    @apply bg-red-200 hover:!bg-red-100
 }
 
 .trash {
     @apply size-4;
+}
+
+.textDelete {
+    @apply text-[16px] font-bold;
 }
 
 .animationThreePunts {

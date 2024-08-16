@@ -1,14 +1,13 @@
 import Links from "@/components/layout/Links";
 import UserAvatar from "@/components/users/UserAvatar";
 import UserTooltip from "@/components/users/UserTooltip";
-import { CommentData } from "@/lib/types";
 import { formatedRelativeDate } from "@/lib/utils";
-
-export interface CommentProps {
-    comments: CommentData,
-}
+import { CommentProps } from "../../../interfaces/commentProps";
+import { useSession } from "@/app/(main)/SessionProvider";
+import CommentMoreButton from "./CommentMoreButton";
 
 export default function Comment({ comments }: CommentProps) {
+    const { user } = useSession()
     return (
         <div className="flex gap-3 py-3">
             <span className="hidden sm:inline">
@@ -29,6 +28,9 @@ export default function Comment({ comments }: CommentProps) {
                 </div>
                 <div>{comments.content}</div>
             </div>
+            {comments.user.id === user.id && (
+                <CommentMoreButton className="ms-auto" comments={comments} />
+            )}
         </div>
     )
 }
