@@ -10,7 +10,7 @@ export default function Comment({ comments }: CommentProps) {
     const { user } = useSession()
     return (
         <div className="flex gap-3 py-3">
-            <span className="hidden sm:inline">
+            <span className="inline">
                 <UserTooltip user={comments.user}>
                     <Links url={`/users/${comments.user.id}`}>
                         <UserAvatar avatarUrl={comments.user.avatarUrl} />
@@ -28,9 +28,11 @@ export default function Comment({ comments }: CommentProps) {
                 </div>
                 <div>{comments.content}</div>
             </div>
-            {comments.user.id === user.id && (
-                <CommentMoreButton className="ms-auto" comments={comments} />
-            )}
-        </div>
+            {
+                comments.user.id === user.id && (
+                    <CommentMoreButton className="ms-auto" comments={comments} />
+                )
+            }
+        </div >
     )
 }
