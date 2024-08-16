@@ -18,13 +18,15 @@ model User {
   googleId    String?    @unique
   avatarUrl   String?
   bio         String?
-  createAd    DateTime   @default(now())
   session     Session[]
   posts       Post[]
   following   Follow[]   @relation("Following")
   followers   Follow[]   @relation("Followers")
   likes       Like[]
   bookmarks   Bookmark[]
+  comments    Comment[]
+
+  createAd DateTime @default(now())
 
   @@map("users")
 }
@@ -56,7 +58,9 @@ model Post {
   attachments Media[]
   likes       Like[]
   bookmarks   Bookmark[]
-  createAd    DateTime   @default(now())
+  comments    Comment[]
+
+  createAd DateTime @default(now())
 
   @@map("posts")
 }
@@ -76,6 +80,19 @@ model Media {
 enum MediaType {
   IMAGE
   VIDEO
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId  String
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createAd DateTime @default(now())
+
+  @@map("comments")
 }
 
 model Like {

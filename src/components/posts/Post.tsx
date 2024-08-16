@@ -11,23 +11,33 @@ import Links from "../layout/Links";
 import { MediaPreviews } from './MediaPreviews';
 import LikeButton from './like/LikeButton';
 import BookMarkButton from './bookmark/BookMarkButton';
+import { useState, useEffect } from 'react';
+import Comments from './comments/Comments';
+import { CommentButton } from './comments/CommentButton';
+import { usePathname } from 'next/navigation';
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
     const dataTooltip = getTooltip({ post })
+    const [showComments, setShowComments] = useState(false)
+    const pathName = usePathname()
+
+    useEffect(() => {
+        if (pathName === `/posts/${post.id}`) {
+            return setShowComments(true)
+        };
+    }, [pathName, post.id])
 
     return (
-        <Links url={`/posts/${post.id}`}>
-            <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
-                <div className={styles.containerEndMain}>
-                    <div className={styles.containerTextWrap}>
-                        {dataTooltip[0].component}
-                        <div>
-                            {dataTooltip[1].component}
-                            <p className={styles.linkUsernamePost}>
-                                {formatedRelativeDate(post.createAd)}
-                            </p>
-                        </div>
+        <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
+            <div className={styles.containerEndMain}>
+                <div className={styles.containerTextWrap}>
+                    {dataTooltip[0].component}
+                    <div>
+                        {dataTooltip[1].component}
+                        <p className={styles.linkUsernamePost}>
+                            {formatedRelativeDate(post.createAd)}
+                        </p>
                     </div>
                     {post.user.id === user?.id && (
                         <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
@@ -39,24 +49,37 @@ export default function Post({ post }: PostProps) {
                 {!!post.attachments?.length && (
                     <MediaPreviews attachments={post.attachments} />
                 )}
-                <br />
-                <div className='flex justify-between p-2'>
-                    <LikeButton
-                        postId={post.id}
-                        initialState={{
-                            likes: post._count.likes,
-                            isLikeByUser: post.likes.some((like) => like.userId === user.id)
-                        }}
+            </div>
+            <LinkiFy>
+                {!post.attachments.length ? (
+                    <Links url={`/posts/${post.id}`}>
+                        <div className={styles.contentPost}>{post.content}</div>
+                    </Links>
+                ) : <div className={styles.contentPost}>{post.content}</div>}
+            </LinkiFy>
+            {!!post.attachments?.length && (
+                <Links url={`/posts/${post.id}`}>
+                    <MediaPreviews attachments={post.attachments} />
+                </Links>
+            )}
+            <br />
+            <div className='flex justify-between p-2'>
+                <div className='flex items-center gap-5'>
+                    <LikeButton postId={post.id} initialState={{
+                        likes: post._count.likes,
+                        isLikeByUser: post.likes.some((like) => like.userId === user.id)
+                    }}
                     />
-                    <BookMarkButton
-                        postId={post.id}
-                        initialState={{
-                            isBookmarkByUser: post.bookmarks.some((bookmark) => bookmark.userId === user.id)
-                        }}
-                    />
+                    <CommentButton post={post} onClick={() => setShowComments(!showComments)} />
                 </div>
-            </article>
-        </Links>
-
+                <BookMarkButton postId={post.id} initialState={{
+                    isBookmarkByUser: post.bookmarks.some((bookmark) => bookmark.userId === user.id)
+                }}
+                />
+            </div>
+            {showComments && (
+                <Comments post={post} />
+            )}
+        </article>
     )
 }
