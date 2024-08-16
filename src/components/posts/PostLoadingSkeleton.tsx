@@ -1,17 +1,7 @@
 import { Skeleton } from "../ui/skeleton";
 import styles from "../../app/styles/main.module.css"
 
-export default function PostsLoadingSkeleton() {
-    return (
-        <div className={styles.containerInfiniteScroll}>
-            <PostLoadingSkeleton />
-            <PostLoadingSkeleton />
-            <PostLoadingSkeleton />
-        </div>
-    )
-}
-
-function PostLoadingSkeleton() {
+export default function PostLoadingSkeleton() {
     return (
         <div className={styles.containerContentSleketon}>
             <div className={styles.containerSecondSleketon}>

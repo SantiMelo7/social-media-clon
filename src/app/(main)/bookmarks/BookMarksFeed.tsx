@@ -7,7 +7,7 @@ import styles from "../../styles/rightMain.module.css"
 import stylesMain from "../../styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/layout/InfiniteScrollContainer"
-import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton"
+import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton"
 
 export default function BookMarksFeed() {
     const {
@@ -18,7 +18,7 @@ export default function BookMarksFeed() {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
-        queryKey: ["post-feed", "bookmark"],
+        queryKey: ["post-feed", "bookmark-info"],
         queryFn: ({ pageParam }) =>
             kyInstance
                 .get(
