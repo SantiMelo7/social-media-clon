@@ -1,20 +1,34 @@
-import { Button } from "@/components/ui/button"
 import { menuBarData } from "@/util/menuBarData"
-import styles from "../../app/styles/main.module.css"
 import { ClassNameProps } from "@/interfaces/classNameProps"
-import Links from "@/components/layout/Links"
+import { validateRequest } from "@/auth"
+import prisma from "@/lib/prisma"
+import NotificationsButtons from "./NotificationsButtons"
+import ButtonNavBar from "@/components/layout/ButonnNavBar"
 
-export default function MenuBar({ className }: ClassNameProps) {
+export default async function MenuBar({ className }: ClassNameProps) {
+    const { user } = await validateRequest()
+    if (!user) return null
+
+    const unreadNotificationCount = await prisma.notification.count({
+        where: {
+            recipientId: user.id,
+            read: false
+        }
+    })
+    const data = menuBarData(unreadNotificationCount)
+    const filteredData = unreadNotificationCount !== null ? data : [data[0], data[2], data[3]];
+
     return (
         <div className={className}>
-            {menuBarData.map((text) => (
+            {filteredData.map((text, index) => (
                 <div key={text.key}>
-                    <Button variant="defaultNotBg" className={styles.buttonMenuBar} title={text.title} asChild>
-                        <Links url={text.href}>
+                    {index === 1 && unreadNotificationCount !== null ? (
+                        <NotificationsButtons initialState={{ unreadCount: unreadNotificationCount }} />
+                    ) : (
+                        <ButtonNavBar title={text.title} url={text.href}>
                             {text.icon}
-                            <span className={styles.responsiveTextTitle}>{text.title}</span>
-                        </Links>
-                    </Button>
+                        </ButtonNavBar>
+                    )}
                 </div>
             ))}
         </div>

@@ -7,7 +7,7 @@ import styles from "../../../../../app/styles/rightMain.module.css"
 import stylesMain from "../../../../../app/styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/layout/InfiniteScrollContainer"
-import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton"
+import { PostsLoadingSkeleton } from "@/components/posts/SleketonPending"
 import { UserPostsProps } from "@/interfaces/userPostsProps"
 
 export default function UserPosts({ userId }: UserPostsProps) {
