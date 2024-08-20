@@ -10,6 +10,7 @@ export async function GET(req: Request, {
         if (!loggedInUser) {
             return Response.json({ error: "Unathorized" }, { status: 401 })
         }
+
         const user = await prisma.user.findUnique({
             where: { id: userId },
             select: {
@@ -28,7 +29,6 @@ export async function GET(req: Request, {
                 }
             }
         })
-
         if (!user) {
             return Response.json({ error: "User not found" }, { status: 404 })
         }
@@ -48,24 +48,44 @@ export async function GET(req: Request, {
 export async function POST(req: Request, {
     params: { userId } }: { params: { userId: string } }) {
     try {
+
         const { user: loggedInUser } = await validateRequest()
         if (!loggedInUser) {
             return Response.json({ error: "Unathorized" }, { status: 401 })
         }
 
-        await prisma.follow.upsert({
-            where: {
-                followerId_followingId: {
+        const post = await prisma.post.findUnique({
+            where: { id: userId },
+            select: {
+                userId: true
+            }
+        })
+        if (!post) {
+            return Response.json({ error: "Post not found" }, { status: 404 })
+        }
+
+        await prisma.$transaction([
+            prisma.follow.upsert({
+                where: {
+                    followerId_followingId: {
+                        followerId: loggedInUser.id,
+                        followingId: userId
+                    }
+                },
+                create: {
                     followerId: loggedInUser.id,
                     followingId: userId
+                },
+                update: {},
+            }),
+            prisma.notification.create({
+                data: {
+                    issuerId: loggedInUser.id,
+                    recipientId: userId,
+                    type: "FOLLOW",
                 }
-            },
-            create: {
-                followerId: loggedInUser.id,
-                followingId: userId
-            },
-            update: {},
-        })
+            })
+        ])
 
         return new Response()
 
@@ -83,12 +103,31 @@ export async function DELETE(req: Request, {
             return Response.json({ error: "Unathorized" }, { status: 401 })
         }
 
-        await prisma.follow.deleteMany({
-            where: {
-                followerId: loggedInUser.id,
-                followingId: userId
+        const post = await prisma.post.findUnique({
+            where: { id: userId },
+            select: {
+                userId: true
             }
         })
+        if (!post) {
+            return Response.json({ error: "Post not found" }, { status: 404 })
+        }
+
+        await prisma.$transaction([
+            prisma.follow.deleteMany({
+                where: {
+                    followerId: loggedInUser.id,
+                    followingId: userId
+                }
+            }),
+            prisma.notification.deleteMany({
+                where: {
+                    issuerId: loggedInUser.id,
+                    recipientId: post.userId,
+                    type: "FOLLOW",
+                }
+            })
+        ])
 
         return new Response()
 
