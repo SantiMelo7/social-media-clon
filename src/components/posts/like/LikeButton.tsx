@@ -1,9 +1,10 @@
+"use client";
+
 import { useToast } from "@/components/ui/use-toast";
-import { useInfo } from "@/hooks/useInfo";
 import kyInstance from "@/lib/ky";
 import { LikesInfo } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryKey, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
 
 export interface LikeButtonProps {
@@ -18,14 +19,16 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
     const url = `/api/posts/${postId}/likes`
     const queryKey: QueryKey = ["like-info", postId]
 
-    const { data } = useInfo(url, "like-info", postId, initialState)
+    const { data } = useQuery({
+        queryKey,
+        queryFn: () => kyInstance.get(url).json<LikesInfo>(),
+        initialData: initialState,
+        staleTime: Infinity,
+    })
 
     const { mutate } = useMutation({
         mutationFn: () => data.isLikeByUser ? kyInstance.delete(url) : kyInstance.post(url),
         onMutate: async () => {
-            toast({
-                description: `Post ${data.isLikeByUser} like`
-            })
             await queryClient.cancelQueries({ queryKey })
             const previousState = queryClient.getQueryData<LikesInfo>(queryKey)
             queryClient.setQueryData<LikesInfo>(queryKey, () => ({
@@ -43,6 +46,7 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
             })
         },
     })
+
     return (
         <button
             className="flex items-center gap-3"
@@ -57,3 +61,15 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
         </button>
     )
 }
+
+/**
+ *  if (previousState?.isLikeByUser) {
+                toast({
+                    description: 'He gave it like this post'
+                })
+            } else {
+                toast({
+                    description: `You liked a post.`
+                })
+            }
+ */

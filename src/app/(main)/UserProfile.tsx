@@ -30,13 +30,13 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
                                 {formatNumber(user._count.posts)}
                             </span>
                         </span>
-                        <FollowerCount userId={user.id} initialState={followerState(user, loggedInUserId)} />
+                        <FollowerCount nameUser={user.username} userId={user.id} initialState={followerState(user, loggedInUserId)} />
                     </div>
                 </div>
                 {user.id === loggedInUserId ? (
                     <EditProfileButton user={user} />
                 ) : (
-                    <FollowButton userId={user.id} initialState={followerState(user, loggedInUserId)}></FollowButton>
+                    <FollowButton nameUser={user.username} userId={user.id} initialState={followerState(user, loggedInUserId)}></FollowButton>
                 )}
             </div>
             {user.bio && (

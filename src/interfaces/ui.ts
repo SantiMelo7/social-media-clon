@@ -27,7 +27,7 @@ export interface LayoutFormProps<TFieldValues extends FieldValues> extends Class
 }
 
 export interface childrenNormal {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export interface LayoutAuthProps extends childrenNormal {

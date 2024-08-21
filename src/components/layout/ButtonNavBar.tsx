@@ -4,7 +4,7 @@ import Links from "./Links";
 import styles from "../../app/styles/main.module.css"
 import { UrlProps } from "@/interfaces/urlProps";
 
-interface ButtonNavbarProps extends childrenNormal, UrlProps {
+export interface ButtonNavbarProps extends childrenNormal, UrlProps {
     title: string;
 }
 

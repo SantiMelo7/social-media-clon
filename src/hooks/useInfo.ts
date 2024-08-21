@@ -17,6 +17,7 @@ export function useInfo<T extends object>(url: string, keyQuery: string, id: str
         staleTime: Infinity,
 
     })
+
     const { mutate } = useMutation({
         mutationFn: () => {
             const data = queryClient.getQueryData<T>(queryKey);

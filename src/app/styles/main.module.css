@@ -147,7 +147,7 @@
 }
 
 .sleketonThree {
-    @apply h-4 w-20 rounded;
+    @apply h-4 w-20 rounded mt-3;
 }
 
 .containerSleketonFour {

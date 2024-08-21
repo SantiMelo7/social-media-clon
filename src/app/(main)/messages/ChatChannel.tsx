@@ -1,12 +1,14 @@
-import { Channel, Window, ChannelHeader, MessageInput, MessageList } from "stream-chat-react";
+import { cn } from "@/lib/utils";
+import { Channel, Window, MessageInput, MessageList } from "stream-chat-react";
+import CustomChannelHeader from "./CustomChannelHeader";
+import { ChatProps } from "@/interfaces/chat";
 
-
-export default function ChatChannel() {
+export default function ChatChannel({ open, openSidebar }: ChatProps) {
     return (
-        <div className="w-full">
+        <div className={cn("w-full md:block", !open && "hidden")}>
             <Channel>
                 <Window>
-                    <ChannelHeader />
+                    <CustomChannelHeader openSidebar={openSidebar} />
                     <MessageList />
                     <MessageInput />
                 </Window>

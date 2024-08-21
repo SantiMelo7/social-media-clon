@@ -1,11 +1,12 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
+import streamServerClient from "@/lib/stream";
 import { createUploadthing, FileRouter } from "uploadthing/next"
 import { UploadThingError, UTApi } from "uploadthing/server";
 
 const f = createUploadthing();
 
-const keyUrl = `/a/${process.env.UPLOADTHING_APP_ID}/`
+const keyUrl = `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`
 const keyUrlF = (file: any) => {
     return file.url.replace(
         "/f/", keyUrl
@@ -15,25 +16,38 @@ const keyUrlF = (file: any) => {
 export const fileRoute = {
     avatar: f({
         image: { maxFileSize: "512KB" }
+
     }).middleware(async () => {
         const { user } = await validateRequest()
         if (!user) throw new Error("Unauthorized")
         return { user }
+
     }).onUploadComplete(async ({ metadata, file }) => {
+
         const oldAvatarUrl = metadata.user.avatarUrl
         if (oldAvatarUrl) {
             const key = oldAvatarUrl.split(keyUrl)[1]
             await new UTApi().deleteFiles(key)
         }
+
         const newAvatarUlr = file.url.replace("/f/", keyUrl)
-        await prisma.user.update({
-            where: {
+        await Promise.all([
+            prisma.user.update({
+                where: {
+                    id: metadata.user.id,
+                },
+                data: {
+                    avatarUrl: newAvatarUlr
+                }
+            }),
+            streamServerClient.partialUpdateUser({
                 id: metadata.user.id,
-            },
-            data: {
-                avatarUrl: newAvatarUlr
-            }
-        })
+                set: {
+                    image: newAvatarUlr
+                }
+            })
+        ])
+
         return { avatarUrl: newAvatarUlr }
     }),
     attachment: f({
@@ -50,7 +64,7 @@ export const fileRoute = {
         .onUploadComplete(async ({ file }) => {
             const media = await prisma.media.create({
                 data: {
-                    url: file.url.replace("/f/", `/a/${process.env.UPLOADTHING_APP_ID}/`),
+                    url: keyUrlF(file),
                     type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
                 },
             });

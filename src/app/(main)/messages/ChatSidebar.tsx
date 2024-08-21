@@ -1,16 +1,42 @@
-import { ChannelList } from "stream-chat-react";
+import { ChannelList, ChannelPreviewMessenger, ChannelPreviewUIComponentProps, useChatContext } from "stream-chat-react";
 import { useSession } from "../SessionProvider";
+import { getAdditionalChannelSearchProps, getFilters, getOptions } from "@/util/configMessage";
+import { cn } from "@/lib/utils";
+import { useCallback, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { MenuHeaderSideBar } from "./MenuHeaderSideBar";
+import { ChatProps } from "@/interfaces/chat";
 
-export default function ChatSideBar() {
+export default function ChatSideBar({ open, openSidebar: onClose }: ChatProps) {
     const { user } = useSession()
+    const filters = getFilters(user)
+    const options = getOptions();
+    const additionalChannelSearchProps = getAdditionalChannelSearchProps(user);
+
+    const ChannelPreviewCustom = useCallback((props: ChannelPreviewUIComponentProps) => (
+        <ChannelPreviewMessenger {...props}
+            onSelect={() => {
+                props.setActiveChannel?.(props.channel, props.watchers)
+                onClose()
+            }}
+        />
+    ), [onClose])
+
+    const queryClient = useQueryClient()
+
+    const { channel } = useChatContext()
+
+    useEffect(() => {
+        if (channel?.id) {
+            queryClient.invalidateQueries({ queryKey: ["unread-messages-count"] })
+        }
+    }, [channel?.id])
+
     return (
-        <div className="size-full flex flex-col border-b sm:border-b-0 sm:border-e w-72 md:ml-0 mx-auto">
-            <ChannelList
-                filters={{
-                    type: "messaging",
-                    members: { $in: [user.id] }
-                }}
-                showChannelSearch
+        <div className={cn("size-full flex-col justify-start h-full w-full md:ml-0 mx-auto", open ? "flex" : "hidden")}>
+            <MenuHeaderSideBar onClose={onClose} />
+            <ChannelList filters={filters} showChannelSearch options={options} sort={{ last_message_at: -1 }}
+                additionalChannelSearchProps={additionalChannelSearchProps} Preview={ChannelPreviewCustom}
             />
         </div>
     )

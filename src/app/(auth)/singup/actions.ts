@@ -2,6 +2,7 @@
 
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
+import streamServerClient from "@/lib/stream";
 import { SingUp, singUpSchema } from "@/lib/validation";
 import { hash } from "argon2";
 import { generateIdFromEntropySize } from "lucia";
@@ -59,15 +60,24 @@ export async function singUp(
                 error: "Email alredy taken"
             }
         }
-        await prisma.user.create({
-            data: {
+
+        await prisma.$transaction(async (tx) => {
+            await tx.user.create({
+                data: {
+                    id: userId,
+                    username,
+                    displayName,
+                    email,
+                    password: passwordHash,
+                }
+            })
+            await streamServerClient.upsertUser({
                 id: userId,
                 username,
-                displayName,
-                email,
-                password: passwordHash,
-            }
+                name: displayName,
+            })
         })
+
         const session = await lucia.createSession(userId, {})
         const sessionCookkie = lucia.createSessionCookie(session.id)
         cookies().set(

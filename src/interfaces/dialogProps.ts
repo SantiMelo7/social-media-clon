@@ -6,7 +6,7 @@ import { childrenNormal } from "./ui";
 import { CommentProps } from "./commentProps";
 
 export interface DialogProps {
-    open: boolean;
+    open?: boolean;
     openChange?: (open: boolean) => void;
 }
 
@@ -23,6 +23,11 @@ export interface DialogDeleteProps extends DialogProps {
 export interface DialogDeleteCommentProps extends DialogProps {
     data: CommentData;
     onOpenChange: () => void;
+}
+
+export interface NewChatDialogProps extends DialogProps {
+    onOpenChange: (open: boolean) => void;
+    onChatCreated: () => void;
 }
 
 export interface DialogUiProps extends childrenNormal, DialogProps {
