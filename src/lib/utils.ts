@@ -50,3 +50,7 @@ export const getTrendingTopics = unstable_cache(
     revalidate: 3 * 60 * 60,
   },
 );
+
+export function slugiFy(input: string): string {
+  return input.toLowerCase().replace(/ /g, "-").replace(/[^a-z0-9-]/g, "")
+}

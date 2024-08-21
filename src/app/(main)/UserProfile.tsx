@@ -19,8 +19,8 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
             <div className="flex flex-wrap gap-3 sm:flex-nowrap">
                 <div className="me-auto space-y-3">
                     <div>
-                        <h1 className="text-3xl font-bold">{user.username}</h1>
-                        <div className="text-muted-foreground">@{user.displayName}</div>
+                        <h1 className="text-3xl font-bold">{user.displayName}</h1>
+                        <div className="text-muted-foreground">@{user.username}</div>
                     </div>
                     <div>Member since {formatDate(user.createAd, "MMM d, yyyy")}</div>
                     <div className="flex items-center gap-3">

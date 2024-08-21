@@ -39,9 +39,15 @@ export default function Post({ post }: PostProps) {
                             {formatedRelativeDate(post.createAd)}
                         </p>
                     </div>
+                    {post.user.id === user?.id && (
+                        <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
+                    )}
                 </div>
-                {post.user.id === user?.id && (
-                    <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
+                <LinkiFy>
+                    <div className={styles.contentPost}>{post.content}</div>
+                </LinkiFy>
+                {!!post.attachments?.length && (
+                    <MediaPreviews attachments={post.attachments} />
                 )}
             </div>
             <LinkiFy>
