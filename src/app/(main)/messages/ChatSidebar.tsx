@@ -6,6 +6,7 @@ import { useCallback, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { MenuHeaderSideBar } from "./MenuHeaderSideBar";
 import { ChatProps } from "@/interfaces/chat";
+import styles from "../../../app/styles/messages.module.css"
 
 export default function ChatSideBar({ open, openSidebar: onClose }: ChatProps) {
     const { user } = useSession()
@@ -33,7 +34,7 @@ export default function ChatSideBar({ open, openSidebar: onClose }: ChatProps) {
     }, [channel?.id])
 
     return (
-        <div className={cn("size-full flex-col justify-start h-full w-full md:ml-0 mx-auto", open ? "flex" : "hidden")}>
+        <div className={cn(styles.containerChatSideBar, open ? "flex" : "hidden")}>
             <MenuHeaderSideBar onClose={onClose} />
             <ChannelList filters={filters} showChannelSearch options={options} sort={{ last_message_at: -1 }}
                 additionalChannelSearchProps={additionalChannelSearchProps} Preview={ChannelPreviewCustom}

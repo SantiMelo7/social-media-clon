@@ -1,0 +1,13 @@
+
+
+.containerChatContent {
+    @apply absolute bottom-0 top-0 flex w-full;
+}
+
+.containerChatSideBar {
+    @apply size-full flex-col justify-start h-full w-full md:ml-0 mx-auto;
+}
+
+.buttonClick {
+    @apply size-5
+}
