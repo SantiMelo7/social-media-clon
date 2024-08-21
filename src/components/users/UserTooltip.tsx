@@ -24,7 +24,7 @@ export default function UserTooltip({ children, user }: UserTooltipProps) {
                                 <UserAvatar avatarUrl={user.avatarUrl} size={70} />
                             </Links>
                             {loggedInUser.id !== user.id && (
-                                <FollowButton userId={user.id} initialState={followerState(user, loggedInUser.id)} />
+                                <FollowButton nameUser={user.username} userId={user.id} initialState={followerState(user, loggedInUser.id)} />
                             )}
                         </div>
                         <div>
@@ -42,7 +42,7 @@ export default function UserTooltip({ children, user }: UserTooltipProps) {
                                 </div>
                             </LinkiFy>
                         )}
-                        <FollowerCount userId={user.id} initialState={followerState(user, loggedInUser.id)} />
+                        <FollowerCount nameUser={user.username} userId={user.id} initialState={followerState(user, loggedInUser.id)} />
                     </div>
                 </TooltipContent>
             </Tooltip>
