@@ -6,7 +6,7 @@ export default function PostLoadingSkeleton() {
         <div className={styles.containerContentSleketon}>
             <div className={styles.containerSecondSleketon}>
                 <Skeleton className={styles.sleketonOne} />
-                <div className={styles.containerOneTwoSleketon}>
+                <div className="flex flex-col">
                     <Skeleton className={styles.sleketonTwo} />
                     <Skeleton className={styles.sleketonThree} />
                 </div>

@@ -7,7 +7,7 @@ import styles from "../styles/rightMain.module.css"
 import stylesMain from "../styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/layout/InfiniteScrollContainer"
-import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton"
+import { PostsLoadingSkeleton } from "@/components/posts/SleketonPending"
 
 export default function ForYouFeed() {
     const {
@@ -35,6 +35,7 @@ export default function ForYouFeed() {
     if (status === "pending") {
         return <PostsLoadingSkeleton />
     }
+
     if (status === "success" && !posts.length && !hasNextPage) {
         return <p className={styles.textError}>No one has posated anything yet.</p>
     }

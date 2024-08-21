@@ -7,7 +7,7 @@ import styles from "../styles/rightMain.module.css"
 import stylesMain from "../styles/main.module.css"
 import kyInstance from "@/lib/ky"
 import InfiniteScrollContainer from "@/components/layout/InfiniteScrollContainer"
-import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton"
+import { PostsLoadingSkeleton } from "@/components/posts/SleketonPending"
 
 export default function FollowingFedd() {
     const {
