@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '../../app/styles/authentication.module.css';
 import { LayoutAuthProps } from '@/interfaces/ui';
 import Links from './Links';
+import GoogleSingInButton from '@/app/(auth)/login/GoogleSingInButton';
 
 export default function LayoutAuth({ children, img, title, description, link, linkText }: LayoutAuthProps) {
     return (
@@ -12,6 +13,12 @@ export default function LayoutAuth({ children, img, title, description, link, li
                     <div>
                         <div className={styles.containerTextLeft}>
                             <h1 className={styles.titleLeft}>{title}</h1>
+                            <div className='space-y-5'>
+                                <GoogleSingInButton />
+                            </div>
+                            <div className='flex justify-center items-center'>
+                                <p className='font-bold text-xl uppercase'>Or</p>
+                            </div>
                             <p className={styles.descriptionContentLeft}>
                                 {description}
                             </p>
