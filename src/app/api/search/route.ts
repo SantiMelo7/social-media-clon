@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { getPostDataInclude, PostsPage } from "@/lib/types";
 import { NextRequest } from "next/server";
 
-export async function name(req: NextRequest) {
+export async function GET(req: NextRequest) {
     try {
 
         const q = req.nextUrl.searchParams.get("q") || ""
