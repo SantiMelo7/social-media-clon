@@ -13,7 +13,6 @@ import { redirect } from "next/navigation";
 export async function singUp(
     crendetials: SingUp
 ): Promise<{ error: string }> {
-    console.log(crendetials);
     try {
         const { username, displayName, email, password } = singUpSchema.parse(crendetials)
         const passwordHash = await hash(password, {

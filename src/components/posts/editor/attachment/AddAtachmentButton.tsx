@@ -7,7 +7,7 @@ export default function AddAtachmentButton({ onFilesSelected, disabled }: AddAta
     const fileInputRef = useRef<HTMLInputElement>(null)
     return (
         <>
-            <Button variant="ghost" size="icon" className="hover:text-primary" disabled={disabled} onClick={() => fileInputRef.current?.click()}>
+            <Button variant="defaultNotBg" size="icon" className="hover:text-primary" disabled={disabled} onClick={() => fileInputRef.current?.click()}>
                 <ImageIcon size={25} />
             </Button>
             <input type="file" accept="image/*, video/*" multiple ref={fileInputRef} className="hidden sr-only" onChange={(e) => {
