@@ -16,13 +16,13 @@ export default function CropImageDialog({ src, cropAspectRatio, onCropped, onClo
     }
 
     return (
-        <DialogUi open openChange={onClose} title="Delete post?" dialogDesc dialogFooter
-            description="Are you sure want to delete this post? This action cannot be undone"
+        <DialogUi open openChange={onClose} title="Upload a profile photo" dialogDesc dialogFooter
+            description="Are you sure this is your profile picture?"
             childrenFooter={
-                <>
+                <div className="flex justify-center items-center gap-x-3">
                     <Button variant="secondary" onClick={onClose}>Cancel</Button>
                     <Button onClick={crop}>Crop</Button>
-                </>
+                </div>
             }
         >
             <Cropper src={src} aspectRatio={cropAspectRatio} guides={false} zoomable={false}

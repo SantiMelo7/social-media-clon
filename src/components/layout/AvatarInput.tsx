@@ -34,7 +34,7 @@ export function AvatarInput({ src, onImageCropped }: AvatarInputProps) {
                 onClick={() => fileInputRef.current?.click()}
                 className="relative group block"
             >
-                <Image src={src} alt="Avatar preview" width={150} height={150} className="size-32 flex-none rounded-2xl object-cover" />
+                <img src={src as string} alt="Avatar preview" width={150} height={150} className="size-32 flex-none rounded-2xl object-cover" />
                 <span className="absolute inset-0 mx-auto flex size-32 items-center justify-center rounded-full bg-black bg-opacity-30 text-white transition-colors duration-200 group-hover:bg-opacity-25 ">
                     <Camera size={24} />
                 </span>
