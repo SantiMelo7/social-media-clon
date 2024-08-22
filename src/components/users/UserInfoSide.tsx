@@ -32,7 +32,7 @@ export default async function UserInfoSide({ user }: UserDataProps) {
                 </div>
             </LinkiFy>
             {user.id !== loggedUser.id && (
-                <FollowButton nameUser={loggedUser.username} userId={user.id} initialState={{
+                <FollowButton userId={user.id} initialState={{
                     followers: user._count.followers,
                     isFollowedByUser: user.followers.some(({ followerId }) => followerId === loggedUser.id)
                 }} />
