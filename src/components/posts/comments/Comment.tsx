@@ -8,6 +8,8 @@ import CommentMoreButton from "./CommentMoreButton";
 
 export default function Comment({ comments }: CommentProps) {
     const { user } = useSession()
+    const displayName = comments.user.displayName;
+    const firstWord = displayName.split(' ')[0];
     return (
         <div className="flex gap-3 py-3">
             <span className="inline">
@@ -21,7 +23,7 @@ export default function Comment({ comments }: CommentProps) {
                 <div className="flex gap-x-3 items-center">
                     <UserTooltip user={comments.user}>
                         <Links url={`/users/${comments.user.id}`}>
-                            <h1 className="font-medium hover:underline">{comments.user.displayName}</h1>
+                            <h1 className="font-medium hover:underline">{firstWord}</h1>
                         </Links>
                     </UserTooltip>
                     <span className="text-muted-foreground">{formatedRelativeDate(comments.createAd)}</span>

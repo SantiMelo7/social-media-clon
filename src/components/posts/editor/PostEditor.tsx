@@ -15,6 +15,7 @@ import { useDropzone } from "@uploadthing/react";
 import StartetKit from "@tiptap/starter-kit"
 import Placeholder from "@tiptap/extension-placeholder"
 import { ClipboardEvent, useEffect, useState } from "react";
+import Links from "@/components/layout/Links";
 
 export default function PostEditor() {
     const { user } = useSession()
