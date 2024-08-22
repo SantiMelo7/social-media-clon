@@ -14,6 +14,7 @@ import Loading from "@/app/loading";
 import LoadingButton from "@/components/layout/LoadingButton";
 import { UserResult } from "./UserResult";
 import { SelectedUser } from "./SelectedUser";
+import styles from "../../../app/styles/messages.module.css"
 
 export default function NewChatDialog({ open, onOpenChange, onChatCreated }: NewChatDialogProps) {
 
@@ -76,23 +77,17 @@ export default function NewChatDialog({ open, onOpenChange, onChatCreated }: New
             }
         >
             <div>
-                <div className="group relative">
-                    <SearchIcon
-                        className="absolute left-5 top-1/2 size-5 -translate-y-1/2 transform text-muted-foreground group-focus-within:text-primary"
-                    />
-                    <input
-                        placeholder="Search Users..."
-                        className="h-12 w-full p-4 ps-14 focus:outline-primary"
-                        value={searchInput}
+                <div className={`group ${styles.containerSearch}`}>
+                    <SearchIcon className={styles.searchIcon} />
+                    <input placeholder="Search Users..." value={searchInput}
+                        className={styles.inputSearch}
                         onChange={(e) => setSearchInput(e.target.value)}
                     />
                 </div>
                 {!!selectedUsers.length && (
-                    <div className="mt-4 flex flex-wrap gap-2 p-2">
+                    <div className={styles.containerSelected}>
                         {selectedUsers.map((text) => (
-                            <SelectedUser
-                                key={text.id}
-                                user={text}
+                            <SelectedUser key={text.id} user={text}
                                 onClick={() => {
                                     setSelectedUsers((prev) => prev.filter((u) => u.id !== text.id))
                                 }}
@@ -101,7 +96,7 @@ export default function NewChatDialog({ open, onOpenChange, onChatCreated }: New
                     </div>
                 )}
                 <hr />
-                <div className="h-96 overflow-y-auto">
+                <div className={styles.containerDataSearch}>
                     {isSuccess && (
                         data.users.map(text => (
                             <UserResult
@@ -119,14 +114,14 @@ export default function NewChatDialog({ open, onOpenChange, onChatCreated }: New
                         ))
                     )}
                     {isSuccess && !data.users.length && (
-                        <p className="my-3 text-center text-muted-foreground">No users found, Try different name</p>
+                        <p className={`${styles.textDefine} ${styles.textNotUserSelect}`}>No users found, Try different name</p>
                     )}
                     {isFetching && <Loading />}
                     {isError && (
-                        <p className="my-3 text-center text-destructive">An error ocurred while loading where</p>
+                        <p className={`${styles.textDefine} ${styles.textError}`}>An error ocurred while loading where</p>
                     )}
                 </div>
-            </div>
-        </DialogUi>
+            </div >
+        </DialogUi >
     )
 }

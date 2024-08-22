@@ -19,11 +19,11 @@ export default function ChatContent() {
     }
 
     return (
-        <main className="relative w-full overflow-hidden rounded-2xl bg-card shadow-sm">
+        <main className={styles.containerMainChat}>
             <div className={styles.containerChatContent}>
                 <Chat client={chatClient} theme={resolvedTheme === "dark" ? "str-chat__theme-dark" : "str-chat__theme-light"}>
-                    <ChatSideBar open={sideBarOpen} openSidebar={() => setSideBarOpen(false)} />
-                    <ChatChannel open={!sideBarOpen} openSidebar={() => setSideBarOpen(true)} />
+                    <ChatSideBar open={sideBarOpen} openSidebar={() => setSideBarOpen(true)} />
+                    <ChatChannel open={!sideBarOpen} openSidebar={() => setSideBarOpen(false)} />
                 </Chat>
             </div>
         </main>

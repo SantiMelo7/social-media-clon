@@ -31,7 +31,7 @@
 }
 
 .inputSearch {
-    @apply pe-10;
+    @apply pe-10 w-full;
 }
 
 .iconSearch {

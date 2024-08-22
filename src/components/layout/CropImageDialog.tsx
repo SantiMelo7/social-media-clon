@@ -1,12 +1,20 @@
-import { Cropper } from "react-cropper"
+import { Cropper, ReactCropperElement } from "react-cropper"
 import { Button } from "../ui/button";
 import "cropperjs/dist/cropper.css"
 import DialogUi from "./DialogUi";
 import { CropImageDialogProps } from "@/interfaces/cropImageDialogProps";
-import { useCropImageDialog } from "@/hooks/useCropImageDialog";
+import { useRef } from "react";
 
 export default function CropImageDialog({ src, cropAspectRatio, onCropped, onClose }: CropImageDialogProps) {
-    const { croperRef, crop } = useCropImageDialog(onCropped, onClose)
+
+    const croperRef = useRef<ReactCropperElement>(null)
+    function crop() {
+        const cropper = croperRef.current?.cropper
+        if (!cropper) return
+        cropper.getCroppedCanvas().toBlob((blog) => onCropped(blog), "image/webp")
+        onClose()
+    }
+
     return (
         <DialogUi open openChange={onClose} title="Delete post?" dialogDesc dialogFooter
             description="Are you sure want to delete this post? This action cannot be undone"

@@ -1,13 +1,71 @@
-
+.containerMainChat {
+    @apply relative w-full overflow-hidden rounded-2xl bg-card shadow-sm;
+}
 
 .containerChatContent {
     @apply absolute bottom-0 top-0 flex w-full;
 }
 
 .containerChatSideBar {
-    @apply size-full flex-col justify-start h-full w-full md:ml-0 mx-auto;
+    @apply size-full flex-col ;
 }
 
 .buttonClick {
-    @apply size-5
+    @apply size-5;
+}
+
+.containerSideBar {
+    @apply flex justify-center items-center gap-3 p-2;
+}
+
+.containerX {
+    @apply h-full p-2;
+}
+
+.titleMessage {
+    @apply text-xl font-bold me-auto md:ms-2;
+}
+
+.containerSearch {
+    @apply relative;
+}
+
+.searchIcon {
+    @apply absolute left-5 top-1/2 size-5 -translate-y-1/2 transform text-muted-foreground group-focus-within:text-primary;
+}
+
+.inputSearch {
+    @apply h-12 w-full p-4 ps-14 focus:outline-primary;
+}
+
+.containerSelected {
+    @apply mt-4 flex flex-wrap gap-2 p-2;
+}
+
+.containerDataSearch {
+    @apply h-96 overflow-y-auto;
+}
+
+.textDefine {
+    @apply my-3 text-center
+}
+
+.textNotUserSelect {
+    @apply text-muted-foreground;
+}
+
+.textError {
+    @apply text-destructive;
+}
+
+.containerChannel {
+    @apply w-full block;
+}
+
+.containerHeader {
+    @apply flex items-center gap-2
+}
+
+.containerButton {
+    @apply h-full pl-5 flex flex-row justify-center items-center gap-x-7;
 }

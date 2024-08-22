@@ -6,8 +6,8 @@ import styles from "../../../app/styles/messages.module.css"
 
 export default function CustomChannelHeader({ openSidebar, ...props }: CustomChannelHeaderProps) {
     return (
-        <div className="flex items-center gap-2">
-            <div className="h-full pl-5 flex flex-row justify-center items-center gap-x-7">
+        <div className={styles.containerHeader}>
+            <div className={styles.containerButton}>
                 <Button variant="defaultNotBg" onClick={openSidebar}>
                     <Menu className={styles.buttonClick} />
                 </Button>

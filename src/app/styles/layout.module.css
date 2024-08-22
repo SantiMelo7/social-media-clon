@@ -1,0 +1,15 @@
+.containerMainPage {
+    @apply flex w-full min-w-0 gap-5;
+}
+
+.containerMainContent {
+    @apply w-full min-w-0 space-y-5;
+}
+
+.containerTitle {
+    @apply rounded-2xl bg-card p-5 shadow-sm;
+}
+
+.title {
+    @apply text-center text-2xl font-bold;
+}

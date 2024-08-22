@@ -5,14 +5,14 @@ import { ChatProps } from "@/interfaces/chat";
 
 export default function ChatChannel({ open, openSidebar }: ChatProps) {
     return (
-        <div className={cn("w-full md:block", !open && "hidden")}>
+        <div className={cn("block w-full", open ? "hidden" : "bloc")}>
             <Channel>
                 <Window>
                     <CustomChannelHeader openSidebar={openSidebar} />
                     <MessageList />
                     <MessageInput />
                 </Window>
-            </Channel>
-        </div>
+            </Channel >
+        </div >
     )
 }

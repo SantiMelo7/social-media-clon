@@ -34,7 +34,7 @@ export default function ChatSideBar({ open, openSidebar: onClose }: ChatProps) {
     }, [channel?.id])
 
     return (
-        <div className={cn(styles.containerChatSideBar, open ? "flex" : "hidden")}>
+        <div className={cn(styles.containerChatSideBar, !open ? "block" : "hidden")}>
             <MenuHeaderSideBar onClose={onClose} />
             <ChannelList filters={filters} showChannelSearch options={options} sort={{ last_message_at: -1 }}
                 additionalChannelSearchProps={additionalChannelSearchProps} Preview={ChannelPreviewCustom}

@@ -41,7 +41,6 @@ export async function WhoToFollow() {
                         </Links>
                     </UserTooltip>
                     <FollowButton
-                        nameUser={text.displayName}
                         userId={text.id}
                         initialState={{
                             followers: text._count.followers,

@@ -2,14 +2,31 @@ import FormFieldProps from "@/components/layout/FormFieldProps";
 import LayoutForm from "@/components/layout/LayoutForm";
 import LoadingButton from "@/components/layout/LoadingButton";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useDialogEdit } from "@/hooks/useDialog";
+import { Textarea } from "@/components/ui/textarea";;
 import { DialogEditProps } from "@/interfaces/dialogProps";
-import { updateUserProfileSchema } from "@/lib/validation";
+import { UpdateUserProfile, updateUserProfileSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useUpdateProfileMutation } from "./mutations";
+import { useState } from "react";
 
 export default function EditProfileForm({ data, onOpenChange }: DialogEditProps) {
-    const { handleSubmit } = useDialogEdit(data, onOpenChange)
+
+    const mutation = useUpdateProfileMutation()
+    const [croppedAvatar, setCroppedAvatar] = useState<Blob | null>(null)
+
+    async function handleSubmit(values: UpdateUserProfile) {
+        const newAvatarFile = croppedAvatar ? new File([croppedAvatar], `avatar_${data.id}.webp`) : undefined
+        mutation.mutate(
+            { values, avatar: newAvatarFile },
+            {
+                onSuccess: () => {
+                    setCroppedAvatar(null)
+                    onOpenChange(false)
+                }
+            }
+        )
+    }
+
     return (
         <LayoutForm className="space-y-3" onSubmit={handleSubmit} defaultValues={{ username: data.username, displayName: data.displayName, bio: data.bio || "" }} resolver={zodResolver(updateUserProfileSchema)}>
             {({ isPending, ...form }) => (
