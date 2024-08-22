@@ -1,9 +1,9 @@
 import { validateRequest } from "@/auth"
-import TrendsSidebar from "@/components/layout/TrendsSidebar"
 import { Metadata } from "next"
 import UserProfile from "../../UserProfile"
 import { getUser } from "@/util/getUser"
 import UserPosts from "./post/UsersPost"
+import ContentMainPage from "@/components/layout/ContentMainPage"
 
 export async function generateMetadata({ params: { username } }: PageUserProfileProps): Promise<Metadata> {
     const { user } = await validateRequest()
@@ -17,27 +17,19 @@ export async function generateMetadata({ params: { username } }: PageUserProfile
 }
 
 export default async function PageUserProfile({ params: { username } }: PageUserProfileProps) {
-    const { user } = await validateRequest()
+    const { user: loggedInUserId } = await validateRequest()
 
-    if (!user) {
+    if (!loggedInUserId) {
         return (
             <p>You&rsquo;re not authorized to view this page</p>
         )
     }
 
-    const userLogin = await getUser(username, user.id)
+    const user = await getUser(username, loggedInUserId.id)
 
     return (
-        <main className="flex w-full min-w-0 gap-5">
-            <div className="w-full min-w-0 space-y-5">
-                <UserProfile user={userLogin} loggedInUserId={user.id} />
-                <div className="rounded-2xl bg-card p-5 shadow-sm">
-                    <h1 className="text-center text-2xl font-bold">{userLogin.displayName} Posts</h1>
-                </div>
-                <UserPosts userId={userLogin.id} />
-            </div>
-            <TrendsSidebar />
-        </main>
+        <ContentMainPage title={`${user.displayName} Posts`} isContenMore component={<UserProfile user={user} loggedInUserId={loggedInUserId.id} />}>
+            <UserPosts userId={user.id} />
+        </ContentMainPage>
     )
 }
-

@@ -10,7 +10,7 @@ export default function useMediaUpload() {
 
     const { startUpload, isUploading } = useUploadThing("attachment", {
         onBeforeUploadBegin(files) {
-            const renamedFiles = files.map(file => {
+            const renamedFiles = files.map((file) => {
                 const extension = file.name.split(".").pop();
                 return new File(
                     [file],
@@ -30,9 +30,9 @@ export default function useMediaUpload() {
         },
         onUploadProgress: setUploadProgress,
         onClientUploadComplete(res) {
-            setAttachments(prev =>
-                prev.map(a => {
-                    const uploadResult = res.find(r => r.name === a.file.name);
+            setAttachments((prev) =>
+                prev.map((a) => {
+                    const uploadResult = res.find((r) => r.name === a.file.name);
                     if (!uploadResult) return a;
                     return {
                         ...a,

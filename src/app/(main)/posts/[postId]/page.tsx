@@ -7,6 +7,7 @@ import { getPostDataInclude } from "@/lib/types"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { cache, Suspense } from "react"
+import styles from "../../../../app/styles/layout.module.css"
 
 export interface PostPageProps {
     params: { postId: string }
@@ -47,8 +48,8 @@ export default async function PostPage({ params: { postId } }: PostPageProps) {
     const post = await getPost(postId, user.id)
 
     return (
-        <main className="flex w-full min-w-0 gap-5">
-            <div className="w-full min-w-0 space-y-5">
+        <main className={styles.containerMainPage}>
+            <div className={styles.containerMainContent}>
                 <Post post={post} />
             </div>
             <div className="sticky top-[5.25rem] hidden h-fit w-80 flex-none lg:block">

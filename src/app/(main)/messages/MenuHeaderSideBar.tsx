@@ -11,13 +11,13 @@ export function MenuHeaderSideBar({ onClose }: MenuHeaderSideBarProps) {
     const [showNewChatDialog, setShowNewChatDialog] = useState(false)
     return (
         <>
-            <div className="flex justify-center items-center gap-3 p-2">
-                <div className="h-full p-2">
+            <div className={styles.containerSideBar}>
+                <div className={styles.containerX}>
                     <Button variant="defaultNotBg" onClick={onClose}>
                         <X className={styles.buttonClick} />
                     </Button>
                 </div>
-                <h1 className="text-xl font-bold me-auto md:ms-2">Messages</h1>
+                <h1 className={styles.titleMessage}>Messages</h1>
                 <Button variant="defaultNotBg" onClick={() => setShowNewChatDialog(true)} title="Start new chat">
                     <MailPlus className={styles.buttonClick} />
                 </Button>

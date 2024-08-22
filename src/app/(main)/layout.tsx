@@ -2,8 +2,7 @@ import { validateRequest } from "@/auth"
 import { redirect } from "next/navigation"
 import SessionProvider from "./SessionProvider"
 import Navbar from "./Navbar"
-import React from "react"
-import MenuBar from "./MenuBar"
+import MenuBar from "../../components/layout/MenuBar"
 import styles from "../styles/main.module.css"
 
 export default async function RootLayout({

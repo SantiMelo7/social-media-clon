@@ -4,7 +4,7 @@ import { UTApi } from "uploadthing/server";
 export async function GET(req: Request) {
     try {
         const authHeader = req.headers.get("Authorization")
-        if (authHeader !== `Bearer ${process.env.NEXT_PUBLIC_CRON_SECRET}`) {
+        if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
             return Response.json(
                 { message: "Invalid authorization header" },
                 { status: 401 }

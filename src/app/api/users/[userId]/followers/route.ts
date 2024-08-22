@@ -54,16 +54,6 @@ export async function POST(req: Request, {
             return Response.json({ error: "Unathorized" }, { status: 401 })
         }
 
-        const post = await prisma.post.findUnique({
-            where: { id: userId },
-            select: {
-                userId: true
-            }
-        })
-        if (!post) {
-            return Response.json({ error: "Post not found" }, { status: 404 })
-        }
-
         await prisma.$transaction([
             prisma.follow.upsert({
                 where: {
@@ -101,16 +91,6 @@ export async function DELETE(req: Request, {
             return Response.json({ error: "Unathorized" }, { status: 401 })
         }
 
-        const post = await prisma.post.findUnique({
-            where: { id: userId },
-            select: {
-                userId: true
-            }
-        })
-        if (!post) {
-            return Response.json({ error: "Post not found" }, { status: 404 })
-        }
-
         await prisma.$transaction([
             prisma.follow.deleteMany({
                 where: {
@@ -121,7 +101,7 @@ export async function DELETE(req: Request, {
             prisma.notification.deleteMany({
                 where: {
                     issuerId: loggedInUser.id,
-                    recipientId: post.userId,
+                    recipientId: userId,
                     type: "FOLLOW",
                 }
             })

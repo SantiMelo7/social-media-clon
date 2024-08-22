@@ -23,14 +23,18 @@ export const fileRoute = {
         return { user }
 
     }).onUploadComplete(async ({ metadata, file }) => {
-
         const oldAvatarUrl = metadata.user.avatarUrl
         if (oldAvatarUrl) {
-            const key = oldAvatarUrl.split(keyUrl)[1]
+            const key = oldAvatarUrl.split(
+                `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`
+            )[1]
             await new UTApi().deleteFiles(key)
         }
 
-        const newAvatarUlr = file.url.replace("/f/", keyUrl)
+        const newAvatarUlr = file.url.replace("/f/", `
+            /a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`
+        )
+
         await Promise.all([
             prisma.user.update({
                 where: {

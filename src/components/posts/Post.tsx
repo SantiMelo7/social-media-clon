@@ -2,11 +2,11 @@
 
 import { formatedRelativeDate } from '../../lib/utils';
 import styles from "../../app/styles/main.module.css"
+import styles2 from "../../app/styles/rightMain.module.css"
 import PostMoreButton from './PostMoreButton';
 import { useSession } from "@/app/(main)/SessionProvider";
 import { PostProps } from "@/interfaces/postProps";
 import LinkiFy from "../linkify/LinkiFy";
-import { getTooltip } from "@/util/getTooltip";
 import Links from "../layout/Links";
 import { MediaPreviews } from './MediaPreviews';
 import LikeButton from './like/LikeButton';
@@ -15,10 +15,11 @@ import { useState, useEffect } from 'react';
 import Comments from './comments/Comments';
 import { CommentButton } from './comments/CommentButton';
 import { usePathname } from 'next/navigation';
+import UserTooltip from '../users/UserTooltip';
+import UserAvatar from '../users/UserAvatar';
 
 export default function Post({ post }: PostProps) {
     const { user } = useSession()
-    const dataTooltip = getTooltip({ post })
     const [showComments, setShowComments] = useState(false)
     const pathName = usePathname()
 
@@ -30,37 +31,39 @@ export default function Post({ post }: PostProps) {
 
     return (
         <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
-            <div className={styles.containerEndMain}>
-                <div className={styles.containerTextWrap}>
-                    {dataTooltip[0].component}
+            <div className={styles2.containerFollow}>
+                <div className='flex gap-x-4'>
+                    <UserTooltip user={post.user}>
+                        <Links url={`/users/${post?.user.displayName}`}>
+                            <UserAvatar avatarUrl={post?.user.avatarUrl} />
+                        </Links>
+                    </UserTooltip>
                     <div>
-                        {dataTooltip[1].component}
+                        <Links className={styles.linkAvatarPost} url={`/users/${post?.user.username}`}>
+                            {post.user.username}
+                        </Links>
                         <p className={styles.linkUsernamePost}>
                             {formatedRelativeDate(post.createAd)}
                         </p>
                     </div>
-                    {post.user.id === user?.id && (
-                        <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
-                    )}
                 </div>
-                <LinkiFy>
-                    <div className={styles.contentPost}>{post.content}</div>
-                </LinkiFy>
-                {!!post.attachments?.length && (
-                    <MediaPreviews attachments={post.attachments} />
+                {post.user.id === user?.id && (
+                    <PostMoreButton post={post} className="group-hover/post:opacity-100 transition-opacity" />
                 )}
             </div>
-            <LinkiFy>
-                {!post.attachments.length ? (
+            {!post.attachments.length ? (
+                <LinkiFy>
                     <Links url={`/posts/${post.id}`}>
                         <div className={styles.contentPost}>{post.content}</div>
                     </Links>
-                ) : <div className={styles.contentPost}>{post.content}</div>}
-            </LinkiFy>
-            {!!post.attachments?.length && (
-                <Links url={`/posts/${post.id}`}>
-                    <MediaPreviews attachments={post.attachments} />
-                </Links>
+                </LinkiFy>
+            ) : (
+                <>
+                    <div className={styles.contentPost}>{post.content}</div>
+                    <Links url={`/posts/${post.id}`}>
+                        <MediaPreviews attachments={post.attachments} />
+                    </Links>
+                </>
             )}
             <br />
             <div className='flex justify-between p-2'>

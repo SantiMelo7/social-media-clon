@@ -2,7 +2,7 @@ import UserButton from "@/components/users/UserButton";
 import styles from "../styles/main.module.css";
 import SearchField from "@/components/layout/SearchField";
 import Links from "@/components/layout/Links";
-import MenuBar from "./MenuBar";
+import MenuBar from "../../components/layout/MenuBar";
 
 export default function Navbar() {
     return (

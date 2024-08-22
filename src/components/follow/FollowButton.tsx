@@ -15,7 +15,7 @@ export default function FollowButton({ userId, initialState }: FollowCountProps)
     const queryKey: QueryKey = ["follower-info", userId]
 
     const { data } = useQuery({
-        queryKey,
+        queryKey: queryKey,
         queryFn: () => kyInstance.get(url).json<FollowerInfo>(),
         initialData: initialState,
         staleTime: Infinity,
@@ -48,15 +48,3 @@ export default function FollowButton({ userId, initialState }: FollowCountProps)
         </Button>
     )
 }
-
-/**
- *       if (previousState?.isFollowedByUser) {
-                toast({
-                    description: `You have stopped foYou have stopped following this user`
-                })
-            } else {
-                toast({
-                    description: `You have liked the post`
-                })
-            }
- */
