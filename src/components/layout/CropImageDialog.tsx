@@ -19,14 +19,14 @@ export default function CropImageDialog({ src, cropAspectRatio, onCropped, onClo
         <DialogUi open openChange={onClose} title="Upload a profile photo" dialogDesc dialogFooter
             description="Are you sure this is your profile picture?"
             childrenFooter={
-                <div className="flex justify-center items-center gap-x-3">
-                    <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                    <Button onClick={crop}>Crop</Button>
+                <div className="flex sm:flex-row gap-4 w-full mb-2">
+                    <Button className="w-full" onClick={crop}>Crop</Button>
+                    <Button className="w-full" variant="secondary" onClick={onClose}>Cancel</Button>
                 </div>
             }
         >
             <Cropper src={src} aspectRatio={cropAspectRatio} guides={false} zoomable={false}
-                ref={croperRef} className="mx-auto size-fit"
+                ref={croperRef} className="w-full h-[773px]"
             />
         </DialogUi>
     )

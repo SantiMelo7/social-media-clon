@@ -135,3 +135,7 @@
 .str-chat__channel-list-react .str-chat__channel-list-messenger-react .str-chat__channel-list-messenger-react__main  {
   @apply p-4;
 }
+
+.cropper-bg  {
+  background-image: none !important;
+}

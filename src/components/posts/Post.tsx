@@ -34,7 +34,7 @@ export default function Post({ post }: PostProps) {
             <div className={styles2.containerFollow}>
                 <div className='flex gap-x-4'>
                     <UserTooltip user={post.user}>
-                        <Links url={`/users/${post?.user.displayName}`}>
+                        <Links url={`/users/${post?.user.username}`}>
                             <UserAvatar avatarUrl={post?.user.avatarUrl} />
                         </Links>
                     </UserTooltip>
